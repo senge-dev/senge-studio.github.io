@@ -1,9 +1,14 @@
-# 欢迎来到森哥Studio的个人主页
+# 从0开始安装ArchLinux
 
 请关注我的B站和YouTube
 
 [B站](https://space.bilibili.com/151336873)
 [YouTube](https://www.youtube.com/channel/UC7lDfWG9hE332i1zjSzzLxA)
+
+> **注意**
+> - 如果你用的是Manjaro，请参考[ManjaroWiki](wiki.manjaro.org)进行配置！
+> - Manjaro按照该文档进行操作，可能会产生致命的问题，该问题与文档作者无关！
+> - 
 
 # ArchLinux安装教程
 ## 准备安装介质
@@ -362,3 +367,132 @@ kde全家桶`sudo pacman -S plasma plasma-nm kde-applications`
 安装完成以后`sudo systemctl enable sddm`启动sddm服务
 `sudo systemctl enable NetworkManager`启动网络管理器
 `sudo reboot`重启
+
+# ArchLinux 系统配置
+
+## 添加32位支持
+编辑`/etc/pacman.conf`文件，并反注释
+```
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+```
+`sudo pacman -Syyu`刷新软件源
+## 添加archlinuxcn源
+编辑`/etc/pacman.conf`文件，并在末尾追加以下内容
+```
+[archlinuxcn]
+SigLevel = TrustAll
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+```
+`sudo pacman -S archlinuxcn-keyring`安装archlinuxcn密钥环
+`sudo pacman -Syyu`刷新软件源
+**警告**
+> - Manjaro不要使用archlinuxcn
+> - Manjaro不要使用archlinuxcn
+> - Manjaro不要使用archlinuxcn
+
+## 安装aur
+### 有archlinuxcn源
+```bash
+sudo pacman -S yaourt yay
+```
+### 无archlinuxcn源
+```bash
+sudo pacman -S git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+```
+
+> **警告**
+> 
+> - 非Arch系请勿使用aur（尤其是Manjaro）
+
+## 安装optimus双显卡（需要配置multilib32位支持并安装aur）
+### 安装Intel核显驱动
+```bash
+sudo pacman -S xf86-video-intel mesa lib32-mesa vulkan-intel lib32-vulkan-intel
+```
+### 安装NVIDIA独显驱动
+直接安装以下显卡驱动
+```bash
+sudo pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia
+```
+Geforce630以下到Geforce400老显卡
+```bash
+yay -S nvidia-390xx-dkms nvidia-390xx-utils lib32-nvidia-390xx-utils
+```
+如果是Geforce400以下的显卡，只能安装开源驱动
+```bash
+sudo pacman -S mesa lib32-mesa xf86-video-nouveau
+```
+### 安装OptimusManager
+```bash
+yay -S optimus-manager optimus-manager-qt
+```
+>**警告**
+> - I 卡 N 卡的 modeset 选项都去掉勾选
+> - 切换到英特尔核显模式前，需要选择 intel，不要选 modesettings 模式。否则会黑屏+混成不能开启
+> - hybird 模式中添加的三个环境变量，在切换到其他模式之前一定要去掉，否则会黑屏，切换不到 intel。
+> - 如果你使用了混成器，调整至 OpenGl 2.0 - 平滑模式。否则切换时可能会卡 splash screen
+> - 本教程仅适用于KDE桌面，其他桌面可能会有Bug
+> - 暂时不支持AMD显卡，驱动作者正在开发中，预计很快就能支持
+
+本部分教程来自[ArchLinux双显卡教程](https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/graphic_driver)
+
+## 安装中文输入法
+新安装的arch linux系统不带中文输入法，直接安装
+```bash
+sudo pacman -S fcitx5-chinese-addons fcitx5-git fcitx5-gtk fcitx5-qt fcitx5-pinyin-zhwiki kcm-fcitx5
+```
+编辑`~/.pam_environment`
+写入以下内容
+```
+GTK_IM_MODULE DEFAULT=fcitx
+QT_IM_MODULE  DEFAULT=fcitx
+XMODIFIERS    DEFAULT=@im=fcitx
+```
+设置开机默认启动fcitx5，编辑`~/.xprofile`
+在文件中写入`fcitx5 &`
+重启电脑，则可以输入中文
+在语言和输入法中添加（位置可能不对，博主最近在用kde桌面）
+## 安装常用软件
+软件包
+| 软件名      | 包名                   |
+| ----------- | ---------------------- |
+| 网易云音乐  | netease-cloud-music    |
+|~~WPS~~          | ~~wps-office(aur)~~             |
+| ~~WPS中文支持~~ | ~~wps-office-mui-zh(aur)~~      |
+| 火狐        | firefox                |
+| VS Code     | visual-studio-code-bin |
+| 谷歌浏览器  | google-chrome          |
+| OBS Studio  | obs-studio             |
+| 火焰截图    | flameshot              |
+| AUR         | yaourt yay（archlinuxcn） |
+|anaconda|anaconda(archlinuxcn)|
+|多线程下载（命令行）|axel|
+
+
+> **警告**
+> 
+> - 非Arch系请勿使用archlinuxcn和aur（尤其是Manjaro）
+> - 非Arch系请勿使用archlinuxcn和aur（尤其是Manjaro）
+> - 非Arch系请勿使用archlinuxcn和aur（尤其是Manjaro）
+
+## 安装blackarch工具包（可选）
+编辑`/etc/pacman.conf`添加blackarch软件源
+追加以下内容
+```
+[blackarch]
+SigLevel = Never
+Server = https://mirrors.tuna.tsinghua.edu.cn/blackarch/$repo/os/$arch
+```
+安装blackarch密钥环`sudo pacman -S blackarch-keyring`
+更改blackarch软件源`sudo vim /etc/pacman.conf`
+把刚才的blackarch软件源中的`Never`改为`TrustAll`
+`sudo pacman -Syyu`刷新软件源
+安装渗透工具`sudo pacman -S blackarch`
+
+>警告：
+> - 非Arch原生不要安装blackarch（尤其是Manjaro），不然容易滚挂！
+> - Arch原生一定要按照以上步骤操作，不然会提示密钥环问题。
