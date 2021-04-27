@@ -185,7 +185,6 @@ pacstrap -i /mnt base base-devel linux linux-firmware vim nano
 >**注意**
 >- base-devel 不是刚需，如果你需要用aur或者是需要使用makepkg安装软件的话建议安装base-devel
 >- 安装vim和nano是因为需要修改配置文件，然而arch linux不带vim和nano， 需要手动安装。
-> chroot到新系统以后新系统软件源可能会失效（如果速度变慢的话请检查一下新系统的/etc/pacman.d/mirrorlist文件）
 
 ### 配置fstab
 
@@ -479,9 +478,9 @@ XMODIFIERS    DEFAULT=@im=fcitx
 
 > **警告**
 > 
-> - 非Arch系请勿使用archlinuxcn和aur（尤其是Manjaro）
-> - 非Arch系请勿使用archlinuxcn和aur（尤其是Manjaro）
-> - 非Arch系请勿使用archlinuxcn和aur（尤其是Manjaro）
+> - 非ArchLinux请勿使用archlinuxcn和aur（尤其是Manjaro）
+> - 非ArchLinux请勿使用archlinuxcn和aur（尤其是Manjaro）
+> - 非ArchLinux请勿使用archlinuxcn和aur（尤其是Manjaro）
 
 ## 安装blackarch工具包（可选）
 编辑`/etc/pacman.conf`添加blackarch软件源
@@ -498,5 +497,5 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/blackarch/$repo/os/$arch
 安装渗透工具`sudo pacman -S blackarch`
 
 >警告：
-> - 非Arch原生不要安装blackarch（尤其是Manjaro），不然容易滚挂！
+> - 非ArchLinux不要安装blackarch（尤其是Manjaro），不然容易滚挂！
 > - Arch原生一定要按照以上步骤操作，不然会提示密钥环问题。
