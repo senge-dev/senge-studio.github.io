@@ -3,12 +3,13 @@
 请关注我的B站和YouTube
 
 [B站](https://space.bilibili.com/151336873)
+
 [YouTube](https://www.youtube.com/channel/UC7lDfWG9hE332i1zjSzzLxA)
 
 > **注意**
 > - 如果你用的是Manjaro，请参考[ManjaroWiki](https://wiki.manjaro.org)进行配置！
 > - Manjaro按照该文档进行操作，可能会产生致命的问题，该问题与文档作者无关！
-> - [ArchWiki](https://wiki.archlinux.org)
+> - 如果想要查看其他配置，请参考[ArchWiki链接](https://wiki.archlinux.org)
 
 # ArchLinux安装教程
 ## 准备安装介质
