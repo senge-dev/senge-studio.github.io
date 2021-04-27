@@ -171,7 +171,7 @@ mount /dev/mydisk4 /mnt/home
 直接切换为中国的软件包 
 
 ```bash
-curl -L -o /etc/pacman.d/mirrorlist "https://www.archlinux.org/mirrorlist/?country=CN"
+curl -L -o /etc/pacman.d/mirrorlist "https://archlinux.org/mirrorlist/?country=CN"
 ```
 
 然后编辑`/etc/pacman.d/mirrorlist`，反注释其中一个或多个链接。
