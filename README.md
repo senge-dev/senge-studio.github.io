@@ -1,6 +1,9 @@
-## Welcome to GitHub Pages
+## 欢迎来到森哥Studio的个人主页
 
-You can use the [editor on GitHub](https://github.com/senge-studio/senge-studio.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+请关注我的BiliBili和YouTube：
+[BiliBili](https://space.bilibili.com/151336873)
+[YouTube](https://www.youtube.com/channel/UC7lDfWG9hE332i1zjSzzLxA)
+
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
