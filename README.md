@@ -386,6 +386,7 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 ```
 `sudo pacman -S archlinuxcn-keyring`安装archlinuxcn密钥环
 `sudo pacman -Syyu`刷新软件源
+
 **警告**
 > - Manjaro不要使用archlinuxcn
 > - Manjaro不要使用archlinuxcn
@@ -394,7 +395,7 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 ## 安装aur
 ### 有archlinuxcn源
 ```bash
-sudo pacman -S yaourt yay
+sudo pacman -S yay
 ```
 ### 无archlinuxcn源
 ```bash
@@ -402,6 +403,7 @@ sudo pacman -S git
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+sudo pacman -U yay*.tar.zst
 ```
 
 > **警告**
