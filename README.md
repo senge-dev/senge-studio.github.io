@@ -408,7 +408,7 @@ sudo pacman -U yay*.tar.zst
 
 > **警告**
 > 
-> - 非Arch系请勿使用aur（尤其是Manjaro）
+> - 非ArchLinux请勿使用aur（尤其是Manjaro）
 
 ## 安装optimus双显卡（需要配置multilib32位支持并安装aur）
 ### 安装Intel核显驱动
