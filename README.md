@@ -8,7 +8,7 @@
 > **注意**
 > - 如果你用的是Manjaro，请参考[ManjaroWiki](wiki.manjaro.org)进行配置！
 > - Manjaro按照该文档进行操作，可能会产生致命的问题，该问题与文档作者无关！
-> - 
+> - [ArchWiki](wiki.archlinux.org)
 
 # ArchLinux安装教程
 ## 准备安装介质
