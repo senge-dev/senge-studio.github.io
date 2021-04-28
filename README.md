@@ -355,9 +355,12 @@ sudo wifi-menu
 
 ### 安装桌面
 
-`sudo pacman -S ttf-dejavu wqy-microhei`安装中文字体
+`sudo pacman -S noto-fonts-cjk`安装中文字体
+
 将语言改成中文`sudo vim /etc/locale.conf`
+
 将英语注释掉，添加以下内容`LANG=zh_CN.UTF-8`
+
 安装x窗口系统`sudo pacman -S xorg`
 
 #### Kde桌面
@@ -443,21 +446,23 @@ yay -S optimus-manager optimus-manager-qt
 本部分教程来自[ArchLinux双显卡教程](https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/graphic_driver)
 
 ## 安装中文输入法
-新安装的arch linux系统不带中文输入法，直接安装
+
+新安装的ArchLinux系统不带中文输入法，直接安装
+
 ```bash
 sudo pacman -S fcitx5-chinese-addons fcitx5-git fcitx5-gtk fcitx5-qt fcitx5-pinyin-zhwiki kcm-fcitx5
 ```
-编辑`~/.pam_environment`
-写入以下内容
+
+编辑`~/.pam_environment`并写入以下内容
 ```
 GTK_IM_MODULE DEFAULT=fcitx
 QT_IM_MODULE  DEFAULT=fcitx
 XMODIFIERS    DEFAULT=@im=fcitx
 ```
-设置开机默认启动fcitx5，编辑`~/.xprofile`
-在文件中写入`fcitx5 &`
+设置开机默认启动fcitx5，编辑`~/.xprofile`并在文件中写入`fcitx5 &`
+
 重启电脑，则可以输入中文
-在语言和输入法中添加（位置可能不对，博主最近在用kde桌面）
+
 ## 安装常用软件
 软件包
 
@@ -483,17 +488,21 @@ XMODIFIERS    DEFAULT=@im=fcitx
 > - 非ArchLinux请勿使用archlinuxcn和aur（尤其是Manjaro）
 
 ## 安装blackarch工具包（可选）
-编辑`/etc/pacman.conf`添加blackarch软件源
-追加以下内容
+编辑`/etc/pacman.conf`添加blackarch软件源并追加以下内容
+
 ```
 [blackarch]
 SigLevel = Never
 Server = https://mirrors.tuna.tsinghua.edu.cn/blackarch/$repo/os/$arch
 ```
 安装blackarch密钥环`sudo pacman -S blackarch-keyring`
+
 更改blackarch软件源`sudo vim /etc/pacman.conf`
+
 把刚才的blackarch软件源中的`Never`改为`TrustAll`
+
 `sudo pacman -Syyu`刷新软件源
+
 安装渗透工具`sudo pacman -S blackarch`
 
 >警告：
