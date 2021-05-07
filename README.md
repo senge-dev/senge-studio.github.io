@@ -238,6 +238,15 @@ zh_CN.UTF-8 UTF-8
 ```
 ### 引导系统
 
+#### EFIStub 直接引导ArchLinux（适用于单系统）
+```bash
+efibootmgr -d /dev/sda -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/sda2 rw initrd=/initramfs-linux.img"
+```
+**提示**
+- 其中的`/dev/sda`是系统所使用的磁盘
+- `-p 1`中的`1`代表EFI分区的位置
+- `/dev/sda2`代表root分区位置
+
 #### Grub引导Windows或其他Linux
 
 运行`pacman -S os-prober`，如果使用archlinux单系统或者是不想用arch linux引导其他系统则可以省略此步骤
