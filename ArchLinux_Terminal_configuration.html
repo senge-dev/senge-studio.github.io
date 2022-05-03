@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>ArchLinux安装前必读 - ArchLinux教程</title>
+        <title>ArchLinux终端配置 - ArchLinux教程</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="ReadmeFirst.html"><strong aria-hidden="true">1.</strong> ArchLinux安装前必读</a></li><li class="chapter-item expanded "><a href="ArchLinux_Installation.html"><strong aria-hidden="true">2.</strong> ArchLinux安装</a></li><li class="chapter-item expanded "><a href="ArchLinux_Configuration.html"><strong aria-hidden="true">3.</strong> ArchLinux配置</a></li><li class="chapter-item expanded "><a href="ArchLinux_Beautify.html"><strong aria-hidden="true">4.</strong> ArchLinux桌面美化</a></li><li class="chapter-item expanded "><a href="ArchLinux_Terminal_configuration.html"><strong aria-hidden="true">5.</strong> ArchLinux终端配置</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="ReadmeFirst.html"><strong aria-hidden="true">1.</strong> ArchLinux安装前必读</a></li><li class="chapter-item expanded "><a href="ArchLinux_Installation.html"><strong aria-hidden="true">2.</strong> ArchLinux安装</a></li><li class="chapter-item expanded "><a href="ArchLinux_Configuration.html"><strong aria-hidden="true">3.</strong> ArchLinux配置</a></li><li class="chapter-item expanded "><a href="ArchLinux_Beautify.html"><strong aria-hidden="true">4.</strong> ArchLinux桌面美化</a></li><li class="chapter-item expanded "><a href="ArchLinux_Terminal_configuration.html" class="active"><strong aria-hidden="true">5.</strong> ArchLinux终端配置</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,16 +134,79 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="从0开始安装archlinux"><a class="header" href="#从0开始安装archlinux">从0开始安装ArchLinux</a></h1>
-<p>请关注我的B站和YouTube</p>
-<p><a href="https://space.bilibili.com/151336873">B站</a></p>
-<p><a href="https://www.youtube.com/channel/UC7lDfWG9hE332i1zjSzzLxA">YouTube</a></p>
+                        <h1 id="安装zsh"><a class="header" href="#安装zsh">安装zsh</a></h1>
+<p>安装软件包<code>zsh</code>
+运行<code>chsh -s /bin/zsh</code>配置zsh
+如果想换回bash，运行<code>chsh -s /bin/bash</code></p>
+<h1 id="安装oh-my-zsh"><a class="header" href="#安装oh-my-zsh">安装oh-my-zsh</a></h1>
+<p>执行以下命令前请确保你已安装<code>git</code></p>
+<p>GitHub在国内部分地区访问速度较慢，有时需要使用科学上网才能访问</p>
+<p>在<code>~/.zshrc</code>中追加以下内容，然后重启终端</p>
+<pre><code class="language-bash">export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890
+export all_proxy=http://127.0.0.1:7890
+</code></pre>
 <blockquote>
 <p><strong>注意</strong></p>
 <ul>
-<li>如果你用的是Manjaro，请参考<a href="https://wiki.manjaro.org">ManjaroWiki</a>进行配置！</li>
-<li>Manjaro按照该文档进行操作，可能会产生致命的问题，该问题与文档作者无关！</li>
-<li>如果想要查看其他配置，请参考<a href="https://wiki.archlinux.org">ArchWiki链接</a></li>
+<li>
+<p><code>7890</code>为代理服务器端口号，不同代理软件端口号不同</p>
+</li>
+<li>
+<p>本文不会提供任何机场，也不会教大家如何配置代理服务器</p>
+</li>
+<li>
+<p>如果你没有任何科学上网手段，也不想使用代理，请在gitee手动搜索对应的git仓库，但是这样的话会相对来说较为繁琐。</p>
+</li>
+</ul>
+</blockquote>
+<p>配置好代理以后，使用终端运行</p>
+<pre><code class="language-bash">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot; 
+</code></pre>
+<blockquote>
+<p>注意：不要以root用户身份执行，除非你只想使用root账户
+如果没有git，运行<code>sudo pacman -S git</code>安装</p>
+</blockquote>
+<h1 id="安装powerlevel10k主题"><a class="header" href="#安装powerlevel10k主题">安装PowerLevel10k主题</a></h1>
+<p>运行<code>sudo pacman -S nerd-fonts-complete</code>安装字体
+运行以下命令安装powerlevel10k主题</p>
+<pre><code class="language-bash">git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+</code></pre>
+<p>配置powerlevel10k</p>
+<p>在~/.zshrc写入<code>ZSH_THEME=&quot;powerlevel10k/powerlevel10k&quot; </code>
+安装后重新打开终端，并更改终端字体为hack（需要安装nerd-fonts，可以在cn源中安装<code>nerd-fonts-complete</code>，这会安装所有的nerd-fonts字体）</p>
+<p><img src=".picture/terminal.png" alt="ArchLinux终端美化效果" /></p>
+<p>如需重新配置powerlevel10k主题，可随时运行<code>p10k configure</code></p>
+<h1 id="安装自动补全插件"><a class="header" href="#安装自动补全插件">安装自动补全插件</a></h1>
+<pre><code class="language-bash">git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+</code></pre>
+<p>添加<code>plugins=(zsh-autosuggestions git)</code></p>
+<h1 id="安装语法高亮插件"><a class="header" href="#安装语法高亮插件">安装语法高亮插件</a></h1>
+<p>运行以下命令</p>
+<pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+</code></pre>
+<p>配置插件</p>
+<pre><code class="language-bash">echo &quot;source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
+</code></pre>
+<h1 id="安装colorls插件"><a class="header" href="#安装colorls插件">安装colorls插件</a></h1>
+<p>安装Ruby Gem，软件包名为<code>ruby</code>
+运行<code>gem install colorls</code>，用gem安装colorls(确保已安装nerd-fonts字体，不然会乱码)
+如果安装速度慢，可以<a href="https://mirror.tuna.tsinghua.edu.cn/help/rubygems/">点击这里</a>切换为清华源</p>
+<p>安装成功以后将下面几行内容写入<code>~/.zshrc</code></p>
+<pre><code class="language-bash">alias ls=colorls
+alias ll=&quot;colorls -l&quot;
+alias la=&quot;colorls -a&quot;
+</code></pre>
+<p>运行<code>source ~/.zshrc</code>使配置立即生效</p>
+<h1 id="sudo输入密码显示星号可选"><a class="header" href="#sudo输入密码显示星号可选">sudo输入密码显示星号(可选)</a></h1>
+<p>编辑<code>/etc/sudoers</code>，为了安全，建议运行<code>visudo</code>命令，然后添加以下内容</p>
+<pre><code>Defaults env_reset,pwfeedback
+</code></pre>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>如果没有安装vi，可以创建软链接或更改默认编辑器，然后就可以使用vim、nano等编辑器来编辑sudoers文件</p>
+<ul>
+<li>运行visudo需要使用root权限</li>
 </ul>
 </blockquote>
 
@@ -151,8 +214,8 @@
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="ArchLinux_Installation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="ArchLinux_Beautify.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -160,8 +223,8 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="ArchLinux_Installation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="ArchLinux_Beautify.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
             </nav>
 

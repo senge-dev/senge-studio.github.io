@@ -1,0 +1,718 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ArchLinux教程</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="ReadmeFirst.html"><strong aria-hidden="true">1.</strong> ArchLinux安装前必读</a></li><li class="chapter-item expanded "><a href="ArchLinux_Installation.html"><strong aria-hidden="true">2.</strong> ArchLinux安装</a></li><li class="chapter-item expanded "><a href="ArchLinux_Configuration.html"><strong aria-hidden="true">3.</strong> ArchLinux配置</a></li><li class="chapter-item expanded "><a href="ArchLinux_Beautify.html"><strong aria-hidden="true">4.</strong> ArchLinux桌面美化</a></li><li class="chapter-item expanded "><a href="ArchLinux_Terminal_configuration.html"><strong aria-hidden="true">5.</strong> ArchLinux终端配置</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ArchLinux教程</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="从0开始安装archlinux"><a class="header" href="#从0开始安装archlinux">从0开始安装ArchLinux</a></h1>
+<p>请关注我的B站和YouTube</p>
+<p><a href="https://space.bilibili.com/151336873">B站</a></p>
+<p><a href="https://www.youtube.com/channel/UC7lDfWG9hE332i1zjSzzLxA">YouTube</a></p>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>如果你用的是Manjaro，请参考<a href="https://wiki.manjaro.org">ManjaroWiki</a>进行配置！</li>
+<li>Manjaro按照该文档进行操作，可能会产生致命的问题，该问题与文档作者无关！</li>
+<li>如果想要查看其他配置，请参考<a href="https://wiki.archlinux.org">ArchWiki链接</a></li>
+</ul>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="archlinux安装教程"><a class="header" href="#archlinux安装教程">ArchLinux安装教程</a></h1>
+<h2 id="准备安装介质"><a class="header" href="#准备安装介质">准备安装介质</a></h2>
+<h3 id="下载arch-linux"><a class="header" href="#下载arch-linux">下载arch linux</a></h3>
+<p>使用清华源下载arch linux
+清华源<a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/">下载链接</a></p>
+<h3 id="刻录系统镜像"><a class="header" href="#刻录系统镜像">刻录系统镜像</a></h3>
+<h4 id="windowsmacos系统"><a class="header" href="#windowsmacos系统">Windows/macOS系统</a></h4>
+<p>下载balenaEtcher<a href="https://www.balena.io/etcher/">官方下载链接</a>
+Windows也可以使用rufus<a href="http://rufus.ie">下载链接</a>
+不建议使用UltraISO</p>
+<h4 id="linux系统"><a class="header" href="#linux系统">Linux系统</a></h4>
+<p>下载balenaEtcher<a href="https://www.balena.io/etcher/">官方下载链接</a>
+运行<code>lsblk</code>找到你的U盘</p>
+<p>运行<code>dd bs=4m if=/dev/sdx of=/dir/archlinux.iso</code>刻录Linux系统
+注：sdx为你的U盘
+/dir/archlinux.iso为下载路径，必须为绝对路径，如：</p>
+<pre><code>/home/username/Downloads/archlinux-2020.10.01-x86_64.iso
+</code></pre>
+<p>一定不要使用：</p>
+<pre><code>~/Downloads/archlinux-2020.10.01-x86_64.iso
+</code></pre>
+<h3 id="使用其他linux发行版本安装"><a class="header" href="#使用其他linux发行版本安装">使用其他Linux发行版本安装</a></h3>
+<p>安装<code>arch-install-scripts</code>，大部分Linux发行版的软件仓库中都有arch安装脚本，可以直接使用<code>pacstrap</code>和<code>arch-chroot</code>命令安装。</p>
+<h2 id="进bios安装arch-linux"><a class="header" href="#进bios安装arch-linux">进Bios安装arch linux</a></h2>
+<h3 id="连接网络"><a class="header" href="#连接网络">连接网络</a></h3>
+<p>如果电脑支持Wi-Fi，可以运行<code>wifi-menu</code>（最新版的archlinux可能移除了相关驱动）：</p>
+<p>如果不支持Wi-Fi，可以用网线连接电脑（博主是用安卓手机USB网络共享连接电脑），然后运<code>dhcpcd</code>
+运行<code>ping https://mirrors.tuna.tsinghua.edu.cn</code>检测网络连接</p>
+<h3 id="使用ssh远程安装"><a class="header" href="#使用ssh远程安装">使用ssh远程安装</a></h3>
+<p>运行<code>pacman -Syy openssh</code>安装openssh
+运行<code>systemctl start sshd</code>启动ssh服务
+运行<code>ifconfig</code>查看ip地址
+运行<code>passwd</code>设置密码
+ssh连接archlinux</p>
+<pre><code class="language-bash"># 进入root用户
+sudo -i
+# ssh连接arch linux
+ssh root@192.168.*.*
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>
+192.168.*.*是arch Linux的IPv4地址
+运行ssh时输入archlinux的密码
+然后可以按照archlinux的安装步骤继续安装</p>
+</blockquote>
+<h3 id="设置时区"><a class="header" href="#设置时区">设置时区</a></h3>
+<pre><code class="language-bash">timedatectl set-ntp true
+</code></pre>
+<h3 id="磁盘分区"><a class="header" href="#磁盘分区">磁盘分区</a></h3>
+<p>运行<code>lsblk</code>查看你的硬盘
+机械硬盘一般是/dev/hdx
+SATA固态硬盘一般是/dev/sdx
+NVME固态硬盘一般是/dev/nvmexn1</p>
+<pre><code class="language-bash">fdisk /dev/mydisk
+</code></pre>
+<p>其中mydisk是你的硬盘
+fdisk常用命令</p>
+<table><thead><tr><th>命令</th><th>操作</th></tr></thead><tbody>
+<tr><td>g</td><td>转化为GPT格式，常见于UEFI启动</td></tr>
+<tr><td>o</td><td>转化为dos格式，常见于LEGACY启动</td></tr>
+<tr><td>m</td><td>帮助</td></tr>
+<tr><td>n</td><td>新建分区</td></tr>
+<tr><td>d</td><td>删除分区</td></tr>
+<tr><td>w</td><td>保存数据</td></tr>
+<tr><td>q</td><td>退出但不保存</td></tr>
+</tbody></table>
+<h4 id="主板支持uefi引导"><a class="header" href="#主板支持uefi引导">主板支持UEFI引导</a></h4>
+<table><thead><tr><th>分区</th><th>挂载点</th><th>建议大小</th><th>格式</th></tr></thead><tbody>
+<tr><td>efi</td><td>/boot/efi</td><td>300M</td><td>vfat</td></tr>
+<tr><td>boot</td><td>/boot</td><td>500M</td><td>ext4</td></tr>
+<tr><td>根分区</td><td>/</td><td>20G</td><td>ext4</td></tr>
+<tr><td>家目录</td><td>/home</td><td>剩余空间</td><td>xfs</td></tr>
+<tr><td>交换分区</td><td>-</td><td>10G</td><td>[swap]</td></tr>
+</tbody></table>
+<h4 id="主板不支持uefi引导"><a class="header" href="#主板不支持uefi引导">主板不支持UEFI引导</a></h4>
+<table><thead><tr><th>分区</th><th>挂载点</th><th>建议大小</th><th>格式</th></tr></thead><tbody>
+<tr><td>根分区</td><td>/</td><td>20G</td><td>ext4</td></tr>
+<tr><td>家目录</td><td>/home</td><td>剩余空间</td><td>xfs</td></tr>
+<tr><td>交换分区</td><td>-</td><td>10G</td><td>[swap]</td></tr>
+</tbody></table>
+<h4 id="格式化分区"><a class="header" href="#格式化分区">格式化分区</a></h4>
+<p><code>mkfs.vfat /dev/mydisk1</code>格式化efi分区
+<code>mkfs.ext4 /dev/mydisk2</code>格式化boot分区
+<code>mkfs.ext4 /dev/mydisk3</code>格式化根分区
+<code>mkfs.xfs /dev/mydisk4</code>格式化home分区
+<code>mkswap /dev/mydisk5</code>设置swap分区
+<code>swapon /dev/mydisk5</code>激活swap分区</p>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>交换分区分区在此处激活，后续无需挂载交换分区</li>
+<li>如果主板不支持UEFI引导，请忽略boot和efi分区</li>
+<li>xfs不支持缩小分区，谨慎使用</li>
+</ul>
+</blockquote>
+<h4 id="挂载分区"><a class="header" href="#挂载分区">挂载分区</a></h4>
+<pre><code class="language-bash"># 挂载根分区
+mount /dev/mydisk3 /mnt
+# 在根分区下新建boot文件夹
+mkdir /mnt/boot
+# 挂载boot分区
+mount /dev/mydisk2 /mnt/boot
+# 在boot目录下新建efi文件夹
+mkdir /mnt/boot/efi
+# 挂载efi分区
+mount /dev/mydisk1 /mnt/boot/efi
+# 在根分区下新建home文件夹
+mkdir /mnt/home
+# 挂载home分区
+mount /dev/mydisk4 /mnt/home
+</code></pre>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>交换分区分区已提前激活，分区时无需挂载交换分区</li>
+<li>如果主板不支持UEFI引导，请忽略boot和efi分区</li>
+</ul>
+</blockquote>
+<h3 id="更换软件源"><a class="header" href="#更换软件源">更换软件源</a></h3>
+<p>直接切换为中国的软件包 </p>
+<pre><code class="language-bash">curl -L -o /etc/pacman.d/mirrorlist &quot;https://archlinux.org/mirrorlist/?country=CN&quot;
+</code></pre>
+<p>然后编辑<code>/etc/pacman.d/mirrorlist</code>，反注释其中一个或多个链接。</p>
+<h3 id="安装基本系统"><a class="header" href="#安装基本系统">安装基本系统</a></h3>
+<pre><code class="language-bash">pacstrap -i /mnt base base-devel linux linux-firmware vim nano
+</code></pre>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>base-devel 不是刚需，如果你需要用aur或者是需要使用makepkg安装软件的话建议安装base-devel</li>
+<li>安装vim和nano是因为需要修改配置文件，然而arch linux不带vim和nano， 需要手动安装。</li>
+</ul>
+</blockquote>
+<h3 id="配置fstab"><a class="header" href="#配置fstab">配置fstab</a></h3>
+<p>自动配置fstab<code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code>
+检查fstab<code>cat /mnt/etc/fstab</code></p>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>无论主板是否支持UEFI都可以用这个方法安装</li>
+</ul>
+</blockquote>
+<h3 id="切换至新系统"><a class="header" href="#切换至新系统">切换至新系统</a></h3>
+<pre><code class="language-bash">arch-chroot /mnt /bin/bash
+</code></pre>
+<h2 id="系统基本配置"><a class="header" href="#系统基本配置">系统基本配置</a></h2>
+<h3 id="语言设置"><a class="header" href="#语言设置">语言设置</a></h3>
+<p>配置本地语言<code>vim /etc/locale.gen</code>
+在结尾追加或反注释</p>
+<pre><code>en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+</code></pre>
+<p><code>locale-gen</code>应用配置
+运行<code>echo LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf</code></p>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>不设置中文的原因是因为tty环境下可能会出现中文乱码，安装桌面时会安装中文字体并修改相关内容</li>
+</ul>
+</blockquote>
+<h3 id="时区设置"><a class="header" href="#时区设置">时区设置</a></h3>
+<p>本地时区配置<code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>
+设置硬件时钟<code>hwclock --systohc --utc</code></p>
+<h3 id="配置主机名"><a class="header" href="#配置主机名">配置主机名</a></h3>
+<p>编辑<code>/etc/hostname</code>，写入<code>myhostname</code>
+&gt;其中myhostname代表你的主机名，如果不配置，默认为archlinux</p>
+<h3 id="配置hosts"><a class="header" href="#配置hosts">配置hosts</a></h3>
+<p>编辑<code>/etc/hosts</code>，把<code>myhostname</code>改为你自己的主机名</p>
+<pre><code class="language-bash">127.0.0.1	localhost
+::1			localhost
+127.0.1.1	myhostname.localdomain	myhostname
+</code></pre>
+<h3 id="引导系统"><a class="header" href="#引导系统">引导系统</a></h3>
+<h4 id="efistub-直接引导archlinux适用于单系统"><a class="header" href="#efistub-直接引导archlinux适用于单系统">EFIStub 直接引导ArchLinux（适用于单系统）</a></h4>
+<pre><code class="language-bash">efibootmgr -d /dev/sda -p 1 -c -L &quot;Arch Linux&quot; -l /vmlinuz-linux -u &quot;root=/dev/sda2 rw initrd=/initramfs-linux.img&quot;
+</code></pre>
+<p><strong>提示</strong></p>
+<ul>
+<li>其中的<code>/dev/sda</code>是系统所使用的磁盘</li>
+<li><code>-p 1</code>中的<code>1</code>代表EFI分区的位置</li>
+<li><code>/dev/sda2</code>代表root分区位置</li>
+</ul>
+<h4 id="grub引导windows或其他linux"><a class="header" href="#grub引导windows或其他linux">Grub引导Windows或其他Linux</a></h4>
+<p>运行<code>pacman -S os-prober</code>，如果使用archlinux单系统或者是不想用arch linux引导其他系统则可以省略此步骤</p>
+<h4 id="主板支持uefi引导-1"><a class="header" href="#主板支持uefi引导-1">主板支持UEFI引导</a></h4>
+<p>下载grub安装时所必需的文件<code>pacman -S dosfstools grub efibootmgr</code>
+安装grub<code>grub-install --target=x86_64-efi --efi-directory=/boot/efi --recheck</code>
+如果提示no error reported则说明grub安装成功
+运行<code>grub-mkconfig -o /boot/grub/grub.cfg</code>更新grub</p>
+<h4 id="主板不支持uefi引导-1"><a class="header" href="#主板不支持uefi引导-1">主板不支持UEFI引导</a></h4>
+<p>下载grub安装时所必需的文件<code>pacman -S grub</code>
+安装grub<code>grub-install /dev/sda --recheck</code>
+如果提示no error reported则说明grub安装成功
+运行<code>grub-mkconfig -o /boot/grub/grub.cfg </code>更新grub</p>
+<h3 id="用户设置"><a class="header" href="#用户设置">用户设置</a></h3>
+<p>设置主机名<code>vim /etc/hostname</code>
+输入主机名，只能输入字母（如果跳过此配置，主机名默认为archlinux）
+设置root密码<code>passwd</code>
+添加用户<code>useradd -m -g users -G wheel -s /bin/bash username</code>
+设置用户密码（可以和root相同）<code>passwd username</code>
+为用户添加sudo权限<code>vim /etc/sudoers</code>
+反注释<code>%wheel ALL=(ALL) ALL</code>
+如果想在输入密码时显示星号，可以追加<code>Defaults env_reset,pwfeedback</code></p>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>usename为用户名</li>
+<li>如果没有设置星号，输入密码时不显示密码是正常现象</li>
+<li>编辑/etc/sudoers时要用:wq!命令执行，加一个感叹号强制执行</li>
+</ul>
+</blockquote>
+<h3 id="安装网络驱动"><a class="header" href="#安装网络驱动">安装网络驱动</a></h3>
+<h4 id="wifi"><a class="header" href="#wifi">wifi</a></h4>
+<p>安装wifi驱动<code>pacman -S netctl iw wpa_supplicant dialog</code>
+博通网卡请安装这个驱动<code>pacman -S broadcom-wl</code></p>
+<h4 id="有线连接dhcpnetworkmanager"><a class="header" href="#有线连接dhcpnetworkmanager">有线连接dhcp、NetworkManager</a></h4>
+<p>安装有线网卡驱动<code>pacman -S dhcp dhcpcd netwkrkmanager</code>
+chroot环境下无法systemctl启动有线网卡</p>
+<h3 id="退出chroot并进入新系统"><a class="header" href="#退出chroot并进入新系统">退出chroot并进入新系统</a></h3>
+<pre><code class="language-bash"># 退出chroot
+exit
+# 卸载efi分区
+umount /dev/mydisk1
+# 卸载boot分区
+umount /dev/mydisk2
+# 卸载home分区
+umount /dev/mydisk4
+# 卸载根分区
+umount /dev/mydisk3
+# 重启电脑
+reboot
+</code></pre>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>运行reboot命令后，请拔掉U盘</li>
+</ul>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="配置系统"><a class="header" href="#配置系统">配置系统</a></h1>
+<h2 id="网络配置"><a class="header" href="#网络配置">网络配置</a></h2>
+<h3 id="wi-fi"><a class="header" href="#wi-fi">Wi-Fi</a></h3>
+<p>最新版的arch可能没有wifi-menu命令</p>
+<pre><code class="language-bash">sudo wifi-menu
+</code></pre>
+<h3 id="dhcp"><a class="header" href="#dhcp">dhcp</a></h3>
+<p>有线连接<code>sudo systemctl enable --now dhcpcd</code>
+重新检查网络连接<code>ping https://mirrors.tuna.tsinghua.edu.cn</code></p>
+<h3 id="networkmanager"><a class="header" href="#networkmanager">NetworkManager</a></h3>
+<p>有线连接<code>sudo systemctl enable --now NetworkManager</code>
+重新检查网络连接<code>ping https://mirrors.tuna.tsinghua.edu.cn</code></p>
+<h2 id="安装驱动"><a class="header" href="#安装驱动">安装驱动</a></h2>
+<h3 id="显卡驱动"><a class="header" href="#显卡驱动">显卡驱动</a></h3>
+<p>运行<code>lspci | grep VGA</code>查看显卡型号
+按照自己的显卡型号安装相应驱动</p>
+<table><thead><tr><th>显卡</th><th>驱动名称</th></tr></thead><tbody>
+<tr><td>通用</td><td>xf86-video-vesa</td></tr>
+<tr><td>Intel</td><td>xf86-video-intel</td></tr>
+<tr><td>AMD</td><td>xf86-video-amdgpu</td></tr>
+<tr><td>NVIDIA</td><td>nvidia nvidia-utils cuda nvidia-settings opencl-nvidia</td></tr>
+<tr><td>开源MVIDIA(不推荐)</td><td>xf86-video-nouveau</td></tr>
+<tr><td>ati</td><td>xf86-video-ati</td></tr>
+<tr><td>vmware虚拟机</td><td>xf86-video-vmware</td></tr>
+</tbody></table>
+<blockquote>
+<p><strong>FBI Warning</strong></p>
+<ul>
+<li>千万不要安装nouveau，千万不要安装nouveau，千万不要安装nouveau！重要的事情说三遍。如果你不怕电脑莫名卡死，当我没说。（doge）</li>
+<li>ps：博主受过nouveau的折磨</li>
+</ul>
+</blockquote>
+<h3 id="触摸板驱动"><a class="header" href="#触摸板驱动">触摸板驱动</a></h3>
+<p><code>sudo pacman -S xf86-input-synaptics</code>笔记本专用，台式机可以忽略（如果有外置触摸板也可以安装这个驱动）</p>
+<h2 id="安装桌面"><a class="header" href="#安装桌面">安装桌面</a></h2>
+<p><code>sudo pacman -S noto-fonts-cjk</code>安装中文字体</p>
+<p>将语言改成中文<code>sudo vim /etc/locale.conf</code></p>
+<p>将英语注释掉，添加以下内容<code>LANG=zh_CN.UTF-8</code></p>
+<p>安装x窗口系统<code>sudo pacman -S xorg</code></p>
+<h3 id="kde桌面"><a class="header" href="#kde桌面">Kde桌面</a></h3>
+<p>简洁的kde桌面<code>sudo pacman -S plasma-meta plasma-nm konsole dolphin kde-connect firefox</code>
+kde全家桶<code>sudo pacman -S plasma plasma-nm kde-applications</code>
+安装完成以后<code>sudo systemctl enable sddm</code>启动sddm服务
+<code>sudo systemctl enable NetworkManager</code>启动网络管理器
+<code>sudo reboot</code>重启</p>
+<h1 id="archlinux-安装后配置"><a class="header" href="#archlinux-安装后配置">ArchLinux 安装后配置</a></h1>
+<h2 id="添加32位支持"><a class="header" href="#添加32位支持">添加32位支持</a></h2>
+<p>编辑<code>/etc/pacman.conf</code>文件，并反注释</p>
+<pre><code>[multilib]
+Include = /etc/pacman.d/mirrorlist
+</code></pre>
+<p><code>sudo pacman -Syyu</code>刷新软件源</p>
+<h2 id="添加archlinuxcn源"><a class="header" href="#添加archlinuxcn源">添加archlinuxcn源</a></h2>
+<p>编辑<code>/etc/pacman.conf</code>文件，并在末尾追加以下内容</p>
+<pre><code>[archlinuxcn]
+SigLevel = TrustAll
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+</code></pre>
+<p><code>sudo pacman -S archlinuxcn-keyring</code>安装archlinuxcn密钥环
+<code>sudo pacman -Syyu</code>刷新软件源</p>
+<p><strong>警告</strong></p>
+<blockquote>
+<ul>
+<li>Manjaro不要使用archlinuxcn</li>
+<li>Manjaro不要使用archlinuxcn</li>
+<li>Manjaro不要使用archlinuxcn</li>
+</ul>
+</blockquote>
+<h2 id="安装aur"><a class="header" href="#安装aur">安装aur</a></h2>
+<h3 id="有archlinuxcn源"><a class="header" href="#有archlinuxcn源">有archlinuxcn源</a></h3>
+<pre><code class="language-bash">sudo pacman -S yay
+</code></pre>
+<h3 id="无archlinuxcn源"><a class="header" href="#无archlinuxcn源">无archlinuxcn源</a></h3>
+<pre><code class="language-bash">sudo pacman -S git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+sudo pacman -U yay*.tar.zst
+</code></pre>
+<blockquote>
+<p><strong>警告</strong></p>
+<ul>
+<li>非ArchLinux请勿使用aur（尤其是Manjaro）</li>
+</ul>
+</blockquote>
+<h2 id="安装optimus双显卡需要配置multilib32位支持并安装aur"><a class="header" href="#安装optimus双显卡需要配置multilib32位支持并安装aur">安装optimus双显卡（需要配置multilib32位支持并安装aur）</a></h2>
+<h3 id="安装intel核显驱动"><a class="header" href="#安装intel核显驱动">安装Intel核显驱动</a></h3>
+<pre><code class="language-bash">sudo pacman -S xf86-video-intel mesa lib32-mesa vulkan-intel lib32-vulkan-intel
+</code></pre>
+<h3 id="安装nvidia独显驱动"><a class="header" href="#安装nvidia独显驱动">安装NVIDIA独显驱动</a></h3>
+<p>直接安装以下显卡驱动</p>
+<pre><code class="language-bash">sudo pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia
+</code></pre>
+<p>Geforce630以下到Geforce400老显卡</p>
+<pre><code class="language-bash">yay -S nvidia-390xx-dkms nvidia-390xx-utils lib32-nvidia-390xx-utils
+</code></pre>
+<p>如果是Geforce400以下的显卡，只能安装开源驱动</p>
+<pre><code class="language-bash">sudo pacman -S mesa lib32-mesa xf86-video-nouveau
+</code></pre>
+<h3 id="安装optimusmanager"><a class="header" href="#安装optimusmanager">安装OptimusManager</a></h3>
+<pre><code class="language-bash">yay -S optimus-manager optimus-manager-qt
+</code></pre>
+<blockquote>
+<p><strong>警告</strong></p>
+<ul>
+<li>I 卡 N 卡的 modeset 选项都去掉勾选</li>
+<li>切换到英特尔核显模式前，需要选择 intel，不要选 modesettings 模式。否则会黑屏+混成不能开启</li>
+<li>hybird 模式中添加的三个环境变量，在切换到其他模式之前一定要去掉，否则会黑屏，切换不到 intel。</li>
+<li>如果你使用了混成器，调整至 OpenGl 2.0 - 平滑模式。否则切换时可能会卡 splash screen</li>
+<li>本教程仅适用于KDE桌面，其他桌面可能会有Bug</li>
+<li>暂时不支持AMD显卡，驱动作者正在开发中，预计很快就能支持</li>
+</ul>
+</blockquote>
+<p>本部分教程来自<a href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/graphic_driver">ArchLinux双显卡教程</a></p>
+<h2 id="安装中文输入法"><a class="header" href="#安装中文输入法">安装中文输入法</a></h2>
+<p>新安装的ArchLinux系统不带中文输入法，直接安装</p>
+<pre><code class="language-bash">sudo pacman -S fcitx5-chinese-addons fcitx5-git fcitx5-gtk fcitx5-qt fcitx5-pinyin-zhwiki kcm-fcitx5
+</code></pre>
+<p>编辑<code>~/.pam_environment</code>并写入以下内容</p>
+<pre><code>GTK_IM_MODULE DEFAULT=fcitx
+QT_IM_MODULE  DEFAULT=fcitx
+XMODIFIERS    DEFAULT=@im=fcitx
+</code></pre>
+<p>设置开机默认启动fcitx5，编辑<code>~/.xprofile</code>并在文件中写入<code>fcitx5 &amp;</code></p>
+<p>重启电脑，则可以输入中文</p>
+<h2 id="安装常用软件"><a class="header" href="#安装常用软件">安装常用软件</a></h2>
+<p>软件包</p>
+<table><thead><tr><th>软件名</th><th>包名</th></tr></thead><tbody>
+<tr><td>网易云音乐</td><td>netease-cloud-music</td></tr>
+<tr><td><del>WPS</del></td><td><del>wps-office(aur)</del></td></tr>
+<tr><td><del>WPS中文支持</del></td><td><del>wps-office-mui-zh(aur)</del></td></tr>
+<tr><td>火狐</td><td>firefox</td></tr>
+<tr><td>VS Code</td><td>visual-studio-code-bin</td></tr>
+<tr><td>谷歌浏览器</td><td>google-chrome</td></tr>
+<tr><td>OBS Studio</td><td>obs-studio</td></tr>
+<tr><td>火焰截图</td><td>flameshot</td></tr>
+<tr><td>AUR</td><td>yaourt yay（archlinuxcn）</td></tr>
+<tr><td>anaconda</td><td>anaconda(archlinuxcn)</td></tr>
+<tr><td>多线程下载（命令行）</td><td>axel</td></tr>
+</tbody></table>
+<blockquote>
+<p><strong>警告</strong></p>
+<ul>
+<li>非ArchLinux请勿使用archlinuxcn和aur（尤其是Manjaro）</li>
+<li>非ArchLinux请勿使用archlinuxcn和aur（尤其是Manjaro）</li>
+<li>非ArchLinux请勿使用archlinuxcn和aur（尤其是Manjaro）</li>
+</ul>
+</blockquote>
+<h2 id="安装blackarch工具包可选"><a class="header" href="#安装blackarch工具包可选">安装blackarch工具包（可选）</a></h2>
+<p>编辑<code>/etc/pacman.conf</code>添加blackarch软件源并追加以下内容</p>
+<pre><code>[blackarch]
+SigLevel = Never
+Server = https://mirrors.tuna.tsinghua.edu.cn/blackarch/$repo/os/$arch
+</code></pre>
+<p>安装blackarch密钥环<code>sudo pacman -S blackarch-keyring</code></p>
+<p>更改blackarch软件源<code>sudo vim /etc/pacman.conf</code></p>
+<p>把刚才的blackarch软件源中的<code>Never</code>改为<code>TrustAll</code></p>
+<p><code>sudo pacman -Syyu</code>刷新软件源</p>
+<p>安装渗透工具<code>sudo pacman -S blackarch</code></p>
+<blockquote>
+<p>警告：</p>
+<ul>
+<li>非ArchLinux不要安装blackarch（尤其是Manjaro），不然容易滚挂！</li>
+<li>Arch原生一定要按照以上步骤操作，不然会提示密钥环问题。</li>
+</ul>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="美化效果图"><a class="header" href="#美化效果图">美化效果图</a></h1>
+<p>以Manjaro为例，arch同样适用
+<img src="https://img-blog.csdnimg.cn/20200509175252686.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI1MTc4MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /></p>
+<h1 id="调整面板"><a class="header" href="#调整面板">调整面板</a></h1>
+<p>删除自带面板，新建空面板，从左往右依次是：</p>
+<blockquote>
+<p>应用程序菜单-&gt;全局菜单-&gt;面板间距-&gt;系统托盘-&gt;数字时钟
+可根据实际情况添加其他部件</p>
+</blockquote>
+<h1 id="安装主题"><a class="header" href="#安装主题">安装主题</a></h1>
+<p>直接下载全局主题，依次点击
+&gt;系统设置-&gt;全局主题-&gt;获取新的主题（如果无法下载，可以分别在Plasma样式、颜色、应用程序风格等自己选择主题进行下载，也可以下载SDDM桌面、欢迎界面、图标和鼠标指针）
+&gt;系统设置-&gt;应用程序风格-&gt;窗口装饰-&gt;标题栏按钮（自己调整窗口标题栏，可以把按键放到左边）
+&gt;系统设置-&gt;工作空间行为-&gt;桌面特效-&gt;糖果-&gt;选择三个特效-&gt;应用
+&gt;系统设置-&gt;工作空间行为-&gt;桌面特效-&gt;外观-&gt;魔灯
+&gt;系统设置-&gt;工作空间行为-&gt;桌面特效-&gt;焦点-&gt;滑出
+&gt;系统设置-&gt;工作空间行为-&gt;桌面特效-&gt;窗口管理-&gt;桌面立方
+&gt;系统设置-&gt;窗口管理-&gt;任务切换器-&gt;把微风改为翻转切换</p>
+<h1 id="安装latte-dock"><a class="header" href="#安装latte-dock">安装Latte-Dock</a></h1>
+<p>关闭背景大小
+绝对大小48
+鼠标悬停放大40%
+删除模拟时钟
+在dock上添加部件
+左侧为应用程序面板
+右侧为回收站</p>
+<pre><code class="language-bash">sudo pacman -S latte-dock
+</code></pre>
+<p>如果右键无反应（此问题常常发生在Manjaro系统上），运行</p>
+<pre><code class="language-bash">sudo pacman -Syyu
+</code></pre>
+<p>此时Latte-Dock可以正常使用</p>
+<h1 id="安装小部件"><a class="header" href="#安装小部件">安装小部件</a></h1>
+<blockquote>
+<p>右键点击桌面空白部分-&gt;点击添加部件-&gt;搜索 Simple System Monitor -&gt; 点击安装</p>
+</blockquote>
+<p>安装后点击配置，Background Color选择Cristal，如果没有交换分区，可以自行关闭
+<img src="https://img-blog.csdnimg.cn/20200509175600576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI1MTc4MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /></p>
+<h2 id="安装panon可选"><a class="header" href="#安装panon可选">安装panon(可选)</a></h2>
+<p>直接添加部件，下载panon，然后运行命令</p>
+<pre><code class="language-bash">sudo pacman -S qt5-websockets python-docopt python-numpy python-pillow python-pyaudio python-cffi python-websockets
+</code></pre>
+<h1 id="平铺kde可选比较接近i3wm"><a class="header" href="#平铺kde可选比较接近i3wm">平铺KDE（可选，比较接近i3wm）</a></h1>
+<p>2020年9月24日更新</p>
+<h2 id="教程来源"><a class="header" href="#教程来源">教程来源</a></h2>
+<p><a href="https://opensuse.bwsl.wang/opensuse/%E5%B9%B3%E9%93%BAKDE.html">教程来自于以下链接</a>，<a href="https://space.bilibili.com/268630727?from=search&amp;seid=12844584618959748428">点击查看</a>原作者哔哩哔哩主页</p>
+<h2 id="详细教程"><a class="header" href="#详细教程">详细教程</a></h2>
+<pre><code class="language-bash">git clone https://github.com/lingtjien/Grid-Tiling-Kwin.git ~/Grid-Tiling-Kwin
+</code></pre>
+<pre><code class="language-bash">kpackagetool5 --type KWin/Script -i ~/Grid-Tiling-Kwin
+</code></pre>
+<pre><code class="language-bash">mkdir ~/.local/share/kservices5
+</code></pre>
+<pre><code class="language-bash">cp ~/Grid-Tiling-Kwin/metadata.desktop ~/.local/share/kservices5/kwin-script-grid-tiling.desktop
+</code></pre>
+<h2 id="效果图"><a class="header" href="#效果图">效果图</a></h2>
+<p><img src="https://img-blog.csdnimg.cn/20200924193831303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI1MTc4MA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" /> </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="安装zsh"><a class="header" href="#安装zsh">安装zsh</a></h1>
+<p>安装软件包<code>zsh</code>
+运行<code>chsh -s /bin/zsh</code>配置zsh
+如果想换回bash，运行<code>chsh -s /bin/bash</code></p>
+<h1 id="安装oh-my-zsh"><a class="header" href="#安装oh-my-zsh">安装oh-my-zsh</a></h1>
+<p>执行以下命令前请确保你已安装<code>git</code></p>
+<p>GitHub在国内部分地区访问速度较慢，有时需要使用科学上网才能访问</p>
+<p>在<code>~/.zshrc</code>中追加以下内容，然后重启终端</p>
+<pre><code class="language-bash">export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890
+export all_proxy=http://127.0.0.1:7890
+</code></pre>
+<blockquote>
+<p><strong>注意</strong></p>
+<ul>
+<li>
+<p><code>7890</code>为代理服务器端口号，不同代理软件端口号不同</p>
+</li>
+<li>
+<p>本文不会提供任何机场，也不会教大家如何配置代理服务器</p>
+</li>
+<li>
+<p>如果你没有任何科学上网手段，也不想使用代理，请在gitee手动搜索对应的git仓库，但是这样的话会相对来说较为繁琐。</p>
+</li>
+</ul>
+</blockquote>
+<p>配置好代理以后，使用终端运行</p>
+<pre><code class="language-bash">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot; 
+</code></pre>
+<blockquote>
+<p>注意：不要以root用户身份执行，除非你只想使用root账户
+如果没有git，运行<code>sudo pacman -S git</code>安装</p>
+</blockquote>
+<h1 id="安装powerlevel10k主题"><a class="header" href="#安装powerlevel10k主题">安装PowerLevel10k主题</a></h1>
+<p>运行<code>sudo pacman -S nerd-fonts-complete</code>安装字体
+运行以下命令安装powerlevel10k主题</p>
+<pre><code class="language-bash">git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+</code></pre>
+<p>配置powerlevel10k</p>
+<p>在~/.zshrc写入<code>ZSH_THEME=&quot;powerlevel10k/powerlevel10k&quot; </code>
+安装后重新打开终端，并更改终端字体为hack（需要安装nerd-fonts，可以在cn源中安装<code>nerd-fonts-complete</code>，这会安装所有的nerd-fonts字体）</p>
+<p><img src=".picture/terminal.png" alt="ArchLinux终端美化效果" /></p>
+<p>如需重新配置powerlevel10k主题，可随时运行<code>p10k configure</code></p>
+<h1 id="安装自动补全插件"><a class="header" href="#安装自动补全插件">安装自动补全插件</a></h1>
+<pre><code class="language-bash">git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+</code></pre>
+<p>添加<code>plugins=(zsh-autosuggestions git)</code></p>
+<h1 id="安装语法高亮插件"><a class="header" href="#安装语法高亮插件">安装语法高亮插件</a></h1>
+<p>运行以下命令</p>
+<pre><code class="language-bash">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+</code></pre>
+<p>配置插件</p>
+<pre><code class="language-bash">echo &quot;source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
+</code></pre>
+<h1 id="安装colorls插件"><a class="header" href="#安装colorls插件">安装colorls插件</a></h1>
+<p>安装Ruby Gem，软件包名为<code>ruby</code>
+运行<code>gem install colorls</code>，用gem安装colorls(确保已安装nerd-fonts字体，不然会乱码)
+如果安装速度慢，可以<a href="https://mirror.tuna.tsinghua.edu.cn/help/rubygems/">点击这里</a>切换为清华源</p>
+<p>安装成功以后将下面几行内容写入<code>~/.zshrc</code></p>
+<pre><code class="language-bash">alias ls=colorls
+alias ll=&quot;colorls -l&quot;
+alias la=&quot;colorls -a&quot;
+</code></pre>
+<p>运行<code>source ~/.zshrc</code>使配置立即生效</p>
+<h1 id="sudo输入密码显示星号可选"><a class="header" href="#sudo输入密码显示星号可选">sudo输入密码显示星号(可选)</a></h1>
+<p>编辑<code>/etc/sudoers</code>，为了安全，建议运行<code>visudo</code>命令，然后添加以下内容</p>
+<pre><code>Defaults env_reset,pwfeedback
+</code></pre>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>如果没有安装vi，可以创建软链接或更改默认编辑器，然后就可以使用vim、nano等编辑器来编辑sudoers文件</p>
+<ul>
+<li>运行visudo需要使用root权限</li>
+</ul>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+    </body>
+</html>
