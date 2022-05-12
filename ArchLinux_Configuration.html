@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="ReadmeFirst.html"><strong aria-hidden="true">1.</strong> ArchLinux安装前必读</a></li><li class="chapter-item expanded "><a href="ArchLinux_Installation.html"><strong aria-hidden="true">2.</strong> ArchLinux安装</a></li><li class="chapter-item expanded "><a href="ArchLinux_Configuration.html" class="active"><strong aria-hidden="true">3.</strong> ArchLinux配置</a></li><li class="chapter-item expanded "><a href="ArchLinux_Beautify.html"><strong aria-hidden="true">4.</strong> ArchLinux桌面美化</a></li><li class="chapter-item expanded "><a href="ArchLinux_Terminal_configuration.html"><strong aria-hidden="true">5.</strong> ArchLinux终端配置</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="ReadmeFirst.html"><strong aria-hidden="true">1.</strong> ArchLinux安装前必读</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ArchLinux_Installation.html"><strong aria-hidden="true">1.1.</strong> ArchLinux安装</a></li><li class="chapter-item expanded "><a href="ArchLinux_Configuration.html" class="active"><strong aria-hidden="true">1.2.</strong> ArchLinux配置</a></li><li class="chapter-item expanded "><a href="ArchLinux_Beautify.html"><strong aria-hidden="true">1.3.</strong> ArchLinux桌面美化</a></li><li class="chapter-item expanded "><a href="ArchLinux_Terminal_configuration.html"><strong aria-hidden="true">1.4.</strong> ArchLinux终端配置</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -137,19 +137,26 @@
                         <h1 id="配置系统"><a class="header" href="#配置系统">配置系统</a></h1>
 <h2 id="网络配置"><a class="header" href="#网络配置">网络配置</a></h2>
 <h3 id="wi-fi"><a class="header" href="#wi-fi">Wi-Fi</a></h3>
-<p>最新版的arch可能没有wifi-menu命令</p>
-<pre><code class="language-bash">sudo wifi-menu
+<p>首先运行<code>sudo systemctl enable --now iwd</code>来启动wifi服务</p>
+<p>如果你的电脑支持Wi-Fi，且处于无线局域网的覆盖范围内，这样的话你可以尝试使用无线连接进行安装</p>
+<p>安装时要运行<code>iwctl</code>，进入iwd控制台</p>
+<p>然后输入<code>device list</code>列出网络设备的名称</p>
+<p>如果你的网络设备的名称是<code>wlan0</code>，你可以运行<code>station wlan0 scan</code>来扫描附近的Wi-Fi热点</p>
+<p>扫描完成后，运行<code>station wlan0 get-networks</code></p>
+<p>如果你要连接的Wi-Fi 的SSID是<code>mywlan</code>，你需要运行<code>station wlan0 connect mywlan</code>，然后你需要输入密码以连接网络</p>
+<p>如果你知道网络设备的名称、Wi-Fi的SSID和Wi-Fi密码，你可以在不运行<code>iwctl</code>的模式下直接运行以下命令来连接Wi-Fi（此处我们假设Wi-Fi SSID是<code>mywifi</code>，密码是<code>mypassword</code>，网络设备名是<code>wlan0</code>）</p>
+<pre><code class="language-bash">iwctl --passphrase mypassword station wlan0 connect mywifi 
 </code></pre>
 <h3 id="dhcp"><a class="header" href="#dhcp">dhcp</a></h3>
-<p>有线连接<code>sudo systemctl enable --now dhcpcd</code>
-重新检查网络连接<code>ping https://mirrors.tuna.tsinghua.edu.cn</code></p>
+<p>有线连接<code>sudo systemctl enable --now dhcpcd</code></p>
+<p>重新检查网络连接<code>ping https://mirrors.tuna.tsinghua.edu.cn</code></p>
 <h3 id="networkmanager"><a class="header" href="#networkmanager">NetworkManager</a></h3>
-<p>有线连接<code>sudo systemctl enable --now NetworkManager</code>
-重新检查网络连接<code>ping https://mirrors.tuna.tsinghua.edu.cn</code></p>
+<p>有线连接<code>sudo systemctl enable --now NetworkManager</code></p>
+<p>重新检查网络连接<code>ping https://mirrors.tuna.tsinghua.edu.cn</code></p>
 <h2 id="安装驱动"><a class="header" href="#安装驱动">安装驱动</a></h2>
 <h3 id="显卡驱动"><a class="header" href="#显卡驱动">显卡驱动</a></h3>
-<p>运行<code>lspci | grep VGA</code>查看显卡型号
-按照自己的显卡型号安装相应驱动</p>
+<p>运行<code>lspci | grep VGA</code>查看显卡型号</p>
+<p>按照自己的显卡型号安装相应驱动</p>
 <table><thead><tr><th>显卡</th><th>驱动名称</th></tr></thead><tbody>
 <tr><td>通用</td><td>xf86-video-vesa</td></tr>
 <tr><td>Intel</td><td>xf86-video-intel</td></tr>
@@ -167,7 +174,7 @@
 </ul>
 </blockquote>
 <h3 id="触摸板驱动"><a class="header" href="#触摸板驱动">触摸板驱动</a></h3>
-<p><code>sudo pacman -S xf86-input-synaptics</code>笔记本专用，台式机可以忽略（如果有外置触摸板也可以安装这个驱动）</p>
+<p><code>sudo pacman -S xf86-input-libinput</code>笔记本专用，台式机可以忽略（如果有外置触摸板也可以安装这个驱动）</p>
 <h2 id="安装桌面"><a class="header" href="#安装桌面">安装桌面</a></h2>
 <p><code>sudo pacman -S noto-fonts-cjk</code>安装中文字体</p>
 <p>将语言改成中文<code>sudo vim /etc/locale.conf</code></p>
@@ -192,8 +199,8 @@ Include = /etc/pacman.d/mirrorlist
 SigLevel = TrustAll
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 </code></pre>
-<p><code>sudo pacman -S archlinuxcn-keyring</code>安装archlinuxcn密钥环
-<code>sudo pacman -Syyu</code>刷新软件源</p>
+<p><code>sudo pacman -S archlinuxcn-keyring</code>安装archlinuxcn密钥环</p>
+<p><code>sudo pacman -Syu</code>刷新软件源</p>
 <p><strong>警告</strong></p>
 <blockquote>
 <ul>
@@ -217,6 +224,7 @@ sudo pacman -U yay*.tar.zst
 <p><strong>警告</strong></p>
 <ul>
 <li>非ArchLinux请勿使用aur（尤其是Manjaro）</li>
+<li>EndeavourOS、Garuda Linux可以使用cn源和aur</li>
 </ul>
 </blockquote>
 <h2 id="安装optimus双显卡需要配置multilib32位支持并安装aur"><a class="header" href="#安装optimus双显卡需要配置multilib32位支持并安装aur">安装optimus双显卡（需要配置multilib32位支持并安装aur）</a></h2>
@@ -262,9 +270,9 @@ XMODIFIERS    DEFAULT=@im=fcitx
 <h2 id="安装常用软件"><a class="header" href="#安装常用软件">安装常用软件</a></h2>
 <p>软件包</p>
 <table><thead><tr><th>软件名</th><th>包名</th></tr></thead><tbody>
-<tr><td>网易云音乐</td><td>netease-cloud-music</td></tr>
-<tr><td><del>WPS</del></td><td><del>wps-office(aur)</del></td></tr>
-<tr><td><del>WPS中文支持</del></td><td><del>wps-office-mui-zh(aur)</del></td></tr>
+<tr><td>网易云音乐</td><td>yesplaymusic(aur)</td></tr>
+<tr><td><del>WPS</del></td><td>wps-office(aur)</td></tr>
+<tr><td><del>WPS中文支持</del></td><td>wps-office-mui-zh(aur)</td></tr>
 <tr><td>火狐</td><td>firefox</td></tr>
 <tr><td>VS Code</td><td>visual-studio-code-bin</td></tr>
 <tr><td>谷歌浏览器</td><td>google-chrome</td></tr>
@@ -273,6 +281,9 @@ XMODIFIERS    DEFAULT=@im=fcitx
 <tr><td>AUR</td><td>yaourt yay（archlinuxcn）</td></tr>
 <tr><td>anaconda</td><td>anaconda(archlinuxcn)</td></tr>
 <tr><td>多线程下载（命令行）</td><td>axel</td></tr>
+<tr><td>QQ</td><td>icalingua</td></tr>
+<tr><td>微信</td><td>wechat-uos</td></tr>
+<tr><td>Telegram</td><td>telegram-desktop</td></tr>
 </tbody></table>
 <blockquote>
 <p><strong>警告</strong></p>
