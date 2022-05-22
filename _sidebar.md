@@ -7,8 +7,8 @@
   * [ArchLinux终端配置](./ArchLinuxInstallationGuide/terminal%20configuration.md)
 
 
-****
-* [邮件反馈](mailto:a1356872768@gmail.com)
-* [BiliBili](https://space.bilibili.com/151336873)
-* [YouTube](https://www.youtube.com/channel/UC7lDfWG9hE332i1zjSzzLxA)
-* [GitHub](https://github.com/senge-studio)
+* [关注或反馈]()
+ * [邮件反馈](mailto:a1356872768@gmail.com)
+ * [BiliBili](https://space.bilibili.com/151336873)
+ * [YouTube](https://www.youtube.com/channel/UC7lDfWG9hE332i1zjSzzLxA)
+ * [GitHub](https://github.com/senge-studio)
