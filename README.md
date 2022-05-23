@@ -1,7 +1,7 @@
 # 浏览前必读
 
 ## Copyright © 森哥Studio 版权说明
-- 本博客采用[CC BY-NC-ND 4.0 协议](https://creativecommons.org/licenses/?lang=zh)，可以引用本博客的所有内容，但是禁止商商用！
+- 本博客采用[CC BY-NC-ND 4.0 协议](https://creativecommons.org/licenses/?lang=zh)，可以引用本博客的所有内容，但是禁止商用！
 - 本博客完全开源，欢迎[提交Issues](https://github.com/senge-studio/senge-studio.github.io/issues)
 
 ## 博客介绍
