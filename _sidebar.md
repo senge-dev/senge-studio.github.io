@@ -1,5 +1,5 @@
 * [浏览前必读](README.md)
-  * [转载文章示例](Reprint.md)
+  * [`*`转载文章示例](Reprint.md)
 * [从0开始安装ArchLinux](./ArchLinuxInstallationGuide/README.md)
   * [ArchLinux安装](./ArchLinuxInstallationGuide/installation.md) 
   * [ArchLinux配置](./ArchLinuxInstallationGuide/configuration.md) 
