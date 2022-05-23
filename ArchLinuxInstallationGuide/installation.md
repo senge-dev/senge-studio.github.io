@@ -426,13 +426,11 @@ efibootmgr -d /dev/sda -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=/dev/s
 - `-p 1`中的`1`代表EFI分区的位置
 - `/dev/sda2`代表root分区位置
 
-#### 注意事项
-
-如果你没使用grub，而且使用的不是普通的linux内核（如zen内核、lily内核或lts内核）
-
-请把`vmlinuz-linux`和`initramfs-linux.img`替换为
-
-`vmlinuz-linux-zen`和`initramfs-linux-zen.img`
+> **注意**:
+>
+> - 如果你没使用grub，而且使用的不是普通的linux内核（如zen内核、lily内核或lts内核）
+> - 请把`vmlinuz-linux`和`initramfs-linux.img`替换为
+> - `vmlinuz-linux-zen`和`initramfs-linux-zen.img`
 
 ### 用户配置
 
