@@ -1,6 +1,7 @@
 # `*`转载文章示例
 
-> - **原链接**: https://wiki.archlinux.org
+> - **原作者**: Senge-Studio
+> - **原链接**: https://senge.studio
 
 ## 第一章
 
