@@ -130,7 +130,7 @@ rfkill list
 rfkill unblock wlan0
 ```
 
-如果你知道你的Wi-Fi SSID和密码，你可以直接使用此命令进行连接
+如果你知道你的Wi-Fi SSID，你可以直接使用此命令进行连接
 
 ```bash
 iwctl --passphrase mypassword station wlan0 connect mywifi
