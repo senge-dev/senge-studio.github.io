@@ -1,8 +1,10 @@
 # ArchLinux安装
 
-## 配置安装介质
+## 准备安装环境
 
-### 从官网下载Arch Linux
+### 配置iso安装介质并启动archiso
+
+#### 从官网下载Arch Linux
 
 | 镜像站                     | 下载地址                                                   |                          哈希值校验                          |
 | :------------------------- | :--------------------------------------------------------- | :----------------------------------------------------------: |
@@ -14,9 +16,9 @@
 
 > **注意**: 无论从哪个镜像站下载，请务必验证镜像的`sha256`哈希值，确保下载的archlinux iso没有被恶意修改。
 
-### sha256验证
+#### sha256验证
 
-#### 在Microsoft Windows计算机上进行验证
+##### 在Microsoft Windows计算机上进行验证
 
 按下`Win`+`X`，然后按`A`打开`PowerShell`，然后运行以下命令
 
@@ -24,7 +26,7 @@
 Get-FileHash C:\Users\Administrator\Download\archlinux-2022.05.01-x86_64.iso
 ```
 
-#### 在Linux或macOS等类Unix系统计算机上进行验证
+##### 在Linux或macOS等类Unix系统计算机上进行验证
 
 ```bash
 sha256sum $HOME/Downloads/archlinux-2022.05.01-x86_64.iso
@@ -32,7 +34,7 @@ sha256sum $HOME/Downloads/archlinux-2022.05.01-x86_64.iso
 
 - 无论是Windows还是Linux系统，当你完成哈希验证以后，请从对应的镜像站下载哈希值，下载地址详见右边的校验地址
 
-### 刻录iso镜像到硬盘
+#### 刻录iso镜像到硬盘
 
 - 推荐的刻录工具
 
@@ -61,7 +63,7 @@ sudo dd bs=4m if=/home/username/Downloads/archlinux-2022.05.01-x86_64.iso of=/de
 > - UltraISO为老牌的光盘创建软件且为专有软件，有一些缺陷，所以不在本文的讨论范围中
 > - 无论使用哪一种刻录工具进行刻录，都必须进行`sha256`校验
 
-### 关闭UEFI安全启动
+#### 关闭UEFI安全启动
 
 开机以后按`F2`进入Bios（部分计算机为`delete`键）
 
@@ -69,11 +71,7 @@ sudo dd bs=4m if=/home/username/Downloads/archlinux-2022.05.01-x86_64.iso of=/de
 
 关闭**安全启动**`Secure Boot`（小米的笔记本如需关闭安全启动必需先设置Bios密码）
 
-
-
 > - 当你完成以上所有步骤，你就可以正常安装archlinux了
-
-## 使用其他方式安装
 
 ### 使用其他Linux发行版本安装
 
