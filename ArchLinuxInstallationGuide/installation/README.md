@@ -195,21 +195,7 @@ curl -L -o /etc/pacman.d/mirrorlist "https://archlinux.org/mirrorlist/?country=C
 fdisk /dev/nvmexn1
 ```
 
-其中nvm2xn1是你的硬盘 fdisk常用命令
-
-| 命令 | 操作                            |
-| ---- | ------------------------------- |
-| g    | 转化为GPT格式，常见于UEFI启动   |
-| o    | 转化为dos格式，常见于LEGACY启动 |
-| m    | 帮助                            |
-| n    | 新建分区                        |
-| d    | 删除分区                        |
-| w    | 保存数据                        |
-| q    | 退出但不保存                    |
-
-也可以使用cfdisk来配置，但是需要修改磁盘标识为`Linux Filesystem`、`EFI`或`Linux Swap`
-
-#### ext4/xfs/f2fs
+选择合适的分区工具`fdisk` or `cfdisk`
 
 建议的分区格式
 
@@ -217,103 +203,15 @@ fdisk /dev/nvmexn1
 | -------- | --------- | -------- |
 | efi      | /boot/efi | 300M     |
 | boot     | /boot     | 500M     |
-| 根分区   | /         | 50G      |
-| 家目录   | /home     | 剩余空间 |
-| 交换分区 | -         | 10G      |
+| 根分区   | /         | 剩余空间 |
+| 交换分区 | NONE      | 10G      |
 
-格式化分区
-
-```bash
-# 格式化EFI分区
-mkfs.vfat /dev/nvmexn1p1
-# 格式化boot分区(如需使用xfs、f2fs等格式，请将ext4替换为对应的文件格式)
-mkfs.ext4 /dev/nvmexn1p2
-# 格式化根分区
-mkfs.ext4 /dev/nvmexn1p3
-# 格式化home分区
-mkfs.ext4 /dev/nvmexn1p4
-# 创建并激活交换分区
-mkswap /dev/nvmexn1p5
-swapon /dev/nvmexn1p5
-```
-
-> **注意**:
->
-> - `xfs`和`f2fs`无法缩小分区大小，如果有调整分区的需求，请勿使用这两个分区
->
-> - 如需使用`f2fs`，你需要安装`f2fs-tools`软件包
-> - 博主喜欢将整个EFI分区挂载到`/boot`目录，但是不建议`grub`用户这样做，不然会导致`grub`无法启动
-
-```bash
-# 挂载根分区
-mount /dev/nvmexn1p3 /mnt
-# 在根分区下新建boot文件夹
-mkdir /mnt/boot
-# 挂载boot分区
-mount /dev/nvmexn1p2 /mnt/boot
-# 在boot目录下新建efi文件夹
-mkdir /mnt/boot/efi
-# 挂载efi分区
-mount /dev/nvmexn1p1 /mnt/boot/efi
-# 在根分区下新建home文件夹
-mkdir /mnt/home
-# 挂载home分区
-mount /dev/nvmexn1p4 /mnt/home
-```
+然后根据自己的需求选择交换分区还是交换文件，详情参考[ArchLinux磁盘分区](ArchLinuxInstallationGuide/installation/diskpart.md)
 
 > **注意**
 >
 > - 交换分区分区已提前激活，分区时无需挂载交换分区
 
-#### btrfs
-
-同样是用fdisk或cfdisk来进行磁盘分区，然后进行挂载
-
-| 分区     | 挂载点    | 建议大小 |
-| -------- | --------- | -------- |
-| efi      | /boot/efi | 300M     |
-| 根分区   | /         | 剩余空间 |
-| 交换分区 | -         | 10G      |
-
-格式化btrfs命令请使用`mkfs.btrfs -f /dev/nvmexn1p2`
-
-挂载btrfs分区
-
-```bash
-# 挂载btrfs分区
-mount /dev/mydisk2 /mnt
-# 新建子卷
-cd /mnt
-# 新建root子卷
-btrfs subvol create @
-# 新建home子卷
-btrfs subvol create @home
-# 卸载btrfs分区
-cd /
-umount /dev/mydisk2
-# 挂载root子卷
-mount /dev/mydisk2 /mnt -o subvol=@
-# 挂载home子卷
-mkdir -p /mnt/home
-mount /dev/mydisk2 /mnt/home -o subvol=@home
-# 挂载EFI分区
-mkdir -p /mnt/boot/efi
-mount /dev/mydisk1 /mnt/boot/efi
-```
-
-#### luks
-
-[dm-crypt - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/Dm-crypt)
-
-#### LVM
-
-[LVM (简体中文) - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/LVM_(简体中文))
-
-#### zfs
-
-[ZFS - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/ZFS)
-
-> **注意**: 目前本文只收录了`ext4`、`xfs`、`f2fs`、`btrfs`分区的安装方式，其他安装方式正在研究中，研究完以后将会第一时间更新出来
 
 ### 安装基本系统
 
