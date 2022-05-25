@@ -2,7 +2,7 @@
   * [`*`转载文章示例](Reprint.md)
 * [从0开始安装ArchLinux](./ArchLinuxInstallationGuide/README.md)
   * [ArchLinux安装](./ArchLinuxInstallationGuide/installation/README.md) 
-   * [ArchLinux磁盘分区](./ArchLinuxInstallationGuide/installation/diskpart.md)
+    * [ArchLinux磁盘分区](./ArchLinuxInstallationGuide/installation/diskpart.md)
   * [ArchLinux配置](./ArchLinuxInstallationGuide/configuration.md) 
   * [ArchLinux美化](./ArchLinuxInstallationGuide/beautify.md)
   * [ArchLinux终端配置](./ArchLinuxInstallationGuide/terminal%20configuration.md)
