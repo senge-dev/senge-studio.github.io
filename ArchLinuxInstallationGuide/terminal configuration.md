@@ -1,4 +1,5 @@
 # Archlinux终端配置教程
+
 ## powerlevel10k配置
 
 运行`sudo pacman -S zsh`安装zsh 
@@ -11,10 +12,12 @@
 
 如果没安装git需要运行以下命令，否则跳过`sudo pacman -S git`
 
-安装完成以后，终端运行以下命令
+安装完成以后，终端运行以下命令(已启用CDN加速)
+
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
+sh -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/robbyrussell/oh-my-zsh/tools/install.sh)" 
 ```
+
 > 注意：不要以sudo用户执行，否则将会把配置文件安装到`root`目录下。
 
 ### 安装PowerLevel10k主题
@@ -130,6 +133,10 @@ git clone https://github.com/github/copilot.vim.git ~/.config/nvim/pack/github/s
 > **注意**
 > - GitHub Copilot目前支持`Jetbrains全家桶`、`Visual Studsio Code`和`Neovim`
 > - GitHub Copilot需要绑定GitHub账户才能使用
-> - GitHub Copilot将会无视代码的开源协议
+> - GitHub Copilot将会无视代码的开源协议，但是你可以通过GitHub设置来禁止GitHub Copilot使用你的代码
+> - 目前在国内，GitHub Copilot可以正常使用，不过随着GFW的影响，后期可能会出现无法使用的情况
 > - 因为开源协议的问题，请勿将使用GitHub Copilot编写的代码进行商用
 > - 如果因为商用引发的一切问题和本人以及GitHub无关
+> - GitHub Copilot目前开始收费
+> - 如果你不想购买，你仍可以在`2022-08-22`前免费使用
+> - 如果你想要购买，每个月的费用为`$10`、每年的费用为`$100`，但是GitHub Copilot只支持信用卡支付和PayPal支付，暂不支持微信支付、支付宝等国内支付方式。

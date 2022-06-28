@@ -1,7 +1,11 @@
 # 磁盘分区
 
 ## 常用的分区命令
-### fdisk
+
+<!-- tabs:start -->
+
+<!-- tab:fdisk -->
+
 
 fdisk是一款命令行界面的磁盘分区工具，可以轻松的设置磁盘的可用空间
 
@@ -23,16 +27,20 @@ fdisk /dev/nvmexn1
 | w    | 保存数据                        |
 | q    | 退出但不保存                    |
 
-### cfdisk
+<!-- tab:cfdisk -->
 
 > - 使用cfdisk来配置，cfdisk是类似于图形界面的磁盘管理工具，功能强大，很容易使用
 > - 可以设置分区的格式（默认为`Linux Filesystem`）
 > - 可以灵活的调整分区大小
 > - 需要修改磁盘标识为`Linux Filesystem`、`EFI`或`Linux Swap`
 
+<!-- tabs:end -->
+
 ## 分区格式
 
-### ext4/xfs/f2fs
+<!-- tabs:start -->
+
+<!-- tab:ext4/xfs/f2fs -->
 
 建议的分区格式
 
@@ -88,7 +96,7 @@ mount /dev/nvmexn1p4 /mnt/home
 >
 > - 交换分区分区已提前激活，分区时无需挂载交换分区
 
-### btrfs
+<!-- tab:btrfs -->
 
 同样是用fdisk或cfdisk来进行磁盘分区，然后进行挂载
 
@@ -98,7 +106,17 @@ mount /dev/nvmexn1p4 /mnt/home
 | 根分区   | /         | 剩余空间 |
 | 交换分区 | -         | 10G      |
 
-格式化btrfs命令请使用`mkfs.btrfs -f /dev/nvmexn1p2`
+格式化分区
+
+```bash
+# 格式化EFI分区
+mkfs.vfat /dev/nvmexn1p1
+# 格式化btrfs分区
+mkfs.btrfs -f /dev/nvmexn1p2
+# 创建并激活交换分区
+mkswap /dev/nvmexn1p3
+swapon /dev/nvmexn1p3
+```
 
 挂载btrfs分区
 
@@ -124,19 +142,21 @@ mkdir -p /mnt/boot/efi
 mount /dev/mydisk1 /mnt/boot/efi
 ```
 
-### luks
+<!-- tab:luks -->
 
 [dm-crypt - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/Dm-crypt)
 
-### LVM
+<!-- tab:LVM -->
 
 [LVM (简体中文) - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/LVM_(简体中文))
 
-### zfs
+<!-- tab:zfs -->
 
 [ZFS - ArchWiki (archlinux.org)](https://wiki.archlinux.org/title/ZFS)
 
-### 交换文件swapfile
+<!-- tabs:end -->
+
+## 交换文件Swapfile
 
 - 新建一个指定大小的空白文件，这将作为计算机的交换文件
 ```bash

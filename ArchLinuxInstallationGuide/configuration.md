@@ -2,42 +2,6 @@
 
 ## 配置系统
 
-### 网络配置
-
-#### Wi-Fi
-
-首先运行`sudo systemctl enable --now iwd`来启动wifi服务
-
-如果你的电脑支持Wi-Fi，且处于无线局域网的覆盖范围内，这样的话你可以尝试使用无线连接进行安装
-
-安装时要运行`iwctl`，进入iwd控制台
-
-然后输入`device list`列出网络设备的名称
-
-如果你的网络设备的名称是`wlan0`，你可以运行`station wlan0 scan`来扫描附近的Wi-Fi热点
-
-扫描完成后，运行`station wlan0 get-networks`
-
-如果你要连接的Wi-Fi 的SSID是`mywlan`，你需要运行`station wlan0 connect mywlan`，然后你需要输入密码以连接网络
-
-如果你知道网络设备的名称、Wi-Fi的SSID和Wi-Fi密码，你可以在不运行`iwctl`的模式下直接运行以下命令来连接Wi-Fi（此处我们假设Wi-Fi SSID是`mywifi`，密码是`mypassword`，网络设备名是`wlan0`）
-
-```bash
-iwctl --passphrase mypassword station wlan0 connect mywifi 
-```
-
-#### dhcp
-
-有线连接`sudo systemctl enable --now dhcpcd`
-
-重新检查网络连接`ping https://mirrors.tuna.tsinghua.edu.cn`
-
-#### NetworkManager
-
-有线连接`sudo systemctl enable --now NetworkManager`
-
-重新检查网络连接`ping https://mirrors.tuna.tsinghua.edu.cn`
-
 ### 安装驱动
 
 #### 显卡驱动
@@ -46,26 +10,68 @@ iwctl --passphrase mypassword station wlan0 connect mywifi
 
 按照自己的显卡型号安装相应驱动
 
-| 显卡               | 驱动名称                                               |
-| ------------------ | ------------------------------------------------------ |
-| 通用               | xf86-video-vesa                                        |
-| Intel              | xf86-video-intel                                       |
-| AMD                | xf86-video-amdgpu                                      |
-| NVIDIA             | nvidia nvidia-utils cuda nvidia-settings opencl-nvidia |
-| 开源MVIDIA(不推荐) | xf86-video-nouveau                                     |
-| ati                | xf86-video-ati                                         |
-| vmware虚拟机       | xf86-video-vmware                                      |
+##### NVIDIA显卡
+
+<!-- tabs:start -->
+
+<!-- tab:GeForce920以后 -->
+
+新款显卡，直接安装最新的软件包即可
+
+```bash
+sudo pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia
+```
+
+较老的GeForce显卡，要从AUR安装旧版本的NVIDIA驱动
+
+<!-- tab:GeForce 630到GeForce 920 -->
+
+```bash
+yay -S nvidia-470xx-dkms nvidia-settings lib32-nvidia-470xx-utils linux-headers
+```
+
+<!-- tab:GeForce 400到GeForce 630 -->
+
+旧版的GeForce显卡，需要从AUR安装旧版本的NVIDIA驱动
+
+```bash
+yay -S nvidia-390xx-dkms nvidia-390xx-utils lib32-nvidia-390xx-utils
+```
+
+<!-- tab:GeForce 400以下 -->
+
+远古显卡，AUR没有适配的专有驱动，只能使用开源的NVIDIA驱动nouveau
+
+```bash
+sudo pacman -S mesa lib32-mesa xf86-video-nouveau
+```
+
+<!-- tabs:end -->
 
 > **FBI Warning**
 >
-> - 千万不要安装nouveau，千万不要安装nouveau，千万不要安装nouveau！重要的事情说三遍。如果你不怕电脑莫名卡死，当我没说。（doge）
-> - ps：博主受过nouveau的折磨
+> - 如果你使用的是新显卡（如GeForce RTX系列），那么千万不要安装nouveau，否则极有可能导致显卡无法正常工作从而导致电脑卡顿、死机等问题。
+
+
+##### AMD显卡
+
+<!-- tabs:start -->
+
+博主没有AMD显卡，这个配置是根据当前的主流AMD显卡型号来配置的，可能不适用于旧版的AMD显卡
+
+```bash
+sudo pacman -S mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau
+```
+
+<!-- tabs:end -->
 
 #### 触摸板驱动
 
 `sudo pacman -S xf86-input-libinput`笔记本专用，台式机可以忽略（如果有外置触摸板也可以安装这个驱动）
 
 ### 安装桌面
+
+安装前要先配置中文字体并将系统界面改为中文
 
 `sudo pacman -S noto-fonts-cjk`安装中文字体
 
@@ -75,17 +81,53 @@ iwctl --passphrase mypassword station wlan0 connect mywifi
 
 安装x窗口系统`sudo pacman -S xorg`
 
-#### Kde桌面
+<!-- tabs:start -->
 
-简洁的kde桌面`sudo pacman -S plasma-meta plasma-nm konsole dolphin kde-connect firefox` 
+<!-- tab:KDE Plasma -->
 
-kde全家桶`sudo pacman -S plasma plasma-nm kde-applications`
+简洁的kde桌面：安装`plasma`、`plasma-nm`、`konsole`、`dolphin`、`kde-connect`、`firefox` 
 
-安装完成以后运行`sudo systemctl enable sddm`启动sddm服务
+完整的kde桌面：安装了上述软件包后，还要安装`kde-applications`
 
-运行`sudo systemctl enable NetworkManager`启动网络管理器
+安装完成以后启动`sddm`服务，然后运行`reboot`重启
 
-最后运行`reboot`重启
+中文输入法（fcitx5）
+
+```bash
+sudo pacman -S fcitx5-chinese-addons fcitx5-im fcitx5 fcitx5-pinyin-zhwiki
+```
+
+编辑`/etc/environment`并写入以下内容
+
+```
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+INPUT_METHOD=fcitx
+SDL_IM_MODULE=fcitx
+GLFW_IM_MODULE=ibus
+```
+
+然后重启电脑，则可以输入中文
+
+
+<!-- tab:Gnome -->
+
+基本的Gnome桌面：安装`gnome`、`gnome-extra`
+
+完整的Gnome桌面：安装了上述软件包以后，再安装`gnome-tweak-tool`、`gnome-shell-extensions`、`gnome-shell-extension-gsconnect`、`gnome-shell-extension-dash-to-dock`
+
+安装后启动`gdm`服务，然后重启计算机
+
+安装ibus中文输入法
+
+```bash
+sudo pacman -S ibus ibus-libpinyin
+```
+
+安装完成后重启计算机，然后进行简单的配置，即可使用中文输入法
+
+<!-- tabs:end -->
 
 ### ArchLinux 安装后配置
 
@@ -98,7 +140,7 @@ kde全家桶`sudo pacman -S plasma plasma-nm kde-applications`
 Include = /etc/pacman.d/mirrorlist
 ```
 
-`sudo pacman -Syyu`刷新软件源
+`sudo pacman -Syu`刷新软件源
 
 #### 添加archlinuxcn源
 
@@ -106,7 +148,6 @@ Include = /etc/pacman.d/mirrorlist
 
 ```
 [archlinuxcn]
-SigLevel = TrustAll
 Include = /etc/pacman.d/archlinuxcn
 ```
 
@@ -127,13 +168,21 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 
 ### 安装aur
 
+<!-- tabs:start -->
+
+
+<!-- tab:Git -->
+
+如果你不想安装archlinuxcn源，你可以直接使用`git`克隆并使用`makepkg`安装
+
 ```bash
 sudo pacman -S git
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-sudo pacman -U yay*.tar.zst
 ```
+
+<!-- tab:ArchLinuxCN -->
 
 如果有archlinuxcn源，可以直接从archlinuxcn源中安装
 
@@ -141,47 +190,26 @@ sudo pacman -U yay*.tar.zst
 sudo pacman -S yay
 ```
 
+<!-- tabs:end -->
+
 > **警告**
 >
 > - 非ArchLinux请勿使用aur（尤其是Manjaro）
-> - EndeavourOS、Garuda Linux可以使用cn源和aur
+> - EndeavourOS、Garuda Linux等和Arch Linux用同一仓库的衍生版本可以使用cn源和aur
 
-### 安装optimus双显卡（需要配置multilib32位支持并安装aur）
+### 安装OptimusManager双显卡支持
 
-#### 安装Intel核显驱动
+安装前请确保你的笔记本电脑为双显卡：如：Intel/AMD核显+NVIDIA独显
 
-```bash
-sudo pacman -S xf86-video-intel mesa lib32-mesa vulkan-intel lib32-vulkan-intel
-```
+如果你使用的是单显卡的轻薄本（如Intel Evo认证笔记本），你无需安装Optimus Manager，即使你要使用雷电4外接显卡
 
-#### 安装NVIDIA独显驱动
-
-- 较新型号的显卡
-
-```bash
-sudo pacman -S nvidia nvidia-settings nvidia-utils lib32-nvidia-utils opencl-nvidia lib32-opencl-nvidia
-```
-
-- Geforce630以下到Geforce400老显卡
-
-```bash
-yay -S nvidia-390xx-dkms nvidia-390xx-utils lib32-nvidia-390xx-utils
-```
-
-- 如果是Geforce400以下的显卡，只能安装开源驱动
-
-```bash
-sudo pacman -S mesa lib32-mesa xf86-video-nouveau
-```
-
-#### 安装OptimusManager
+台式机用户也没必要安装Optimus Manager，因为Optimus Manager的主要作用是提升笔记本等便携设备的电池续航
 
 ```bash
 yay -S optimus-manager optimus-manager-qt
 ```
 
 > **警告**
->
 > - I 卡 N 卡的 modeset 选项都去掉勾选
 > - 切换到英特尔核显模式前，需要选择 intel，不要选 modesettings 模式。否则会黑屏+混成不能开启
 > - hybird 模式中添加的三个环境变量，在切换到其他模式之前一定要去掉，否则会黑屏，切换不到 intel。
@@ -191,47 +219,26 @@ yay -S optimus-manager optimus-manager-qt
 
 本部分教程来自[ArchLinux双显卡教程](https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/graphic_driver)
 
-### 安装中文输入法
-
-新安装的ArchLinux系统不带中文输入法，直接安装
-
-```bash
-sudo pacman -S fcitx5-chinese-addons fcitx5-im fcitx5 fcitx5-pinyin-zhwiki kcm-fcitx5
-```
-
-编辑`/etc/environment`并写入以下内容
-
-```
-GTK_IM_MODULE=fcitx
-QT_IM_MODULE=fcitx
-XMODIFIERS=@im=fcitx
-INPUT_METHOD=fcitx
-SDL_IM_MODULE=fcitx
-GLFW_IM_MODULE=ibus
-```
-
-然后重启电脑，则可以输入中文
-
 ### 安装常用软件
 
 软件包
 
-| 软件名               | 包名                      |
-| -------------------- | ------------------------- |
-| 网易云音乐           | yesplaymusic(aur)         |
-| WPS              | wps-office(aur)           |
-| WPS中文支持      | wps-office-mui-zh(aur)    |
-| 火狐                 | firefox                   |
-| VS Code              | visual-studio-code-bin    |
-| 谷歌浏览器           | google-chrome             |
-| OBS Studio           | obs-studio                |
-| 火焰截图             | flameshot                 |
-| AUR                  | yaourt yay（archlinuxcn） |
-| anaconda             | anaconda(archlinuxcn)     |
-| 多线程下载（命令行） | axel                      |
-| QQ                   | icalingua                 |
-| 微信                 | wechat-uos                |
-| Telegram             | telegram-desktop          |
+| 软件名               | 包名                                   |
+| -------------------- | -------------------------------------- |
+| 网易云音乐           | yesplaymusic<sup>aur</sup>             |
+| WPS              | wps-office<sup>aur</sup>                   |
+| WPS中文支持      | wps-office-mui-zh<sup>aur</sup>            |
+| 火狐                 | firefox                                |
+| VS Code              | visual-studio-code-bin<sup>aur</sup>   |
+| 谷歌浏览器           | google-chrome<sup>aur</sup>            |
+| OBS Studio           | obs-studio                             |
+| 火焰截图             | flameshot                              |
+| AUR                  | yaourt yay<sup>archlinuxcn</sup>       |
+| anaconda             | anaconda<sup>archlinuxcn</sup>         |
+| 多线程下载（命令行） | axel                                   |
+| QQ                   | icalingua<sup>archlinuxcn</sup>        |
+| 微信                 | wechat-uos<sup>aur</sup>               |
+| Telegram             | telegram-desktop                       |
 
 > **警告**
 >
@@ -258,9 +265,9 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/blackarch/$repo/os/$arch
 
 更改blackarch软件源`sudo vim /etc/pacman.conf`
 
-把刚才的blackarch软件源中的`Never`改为`TrustAll`
+把刚才的blackarch软件源中的`SigLevel = Never`这一行删除
 
-`sudo pacman -Syyu`刷新软件源
+`sudo pacman -Syu`刷新软件源
 
 安装渗透工具`sudo pacman -S blackarch`
 
