@@ -125,7 +125,13 @@ GLFW_IM_MODULE=ibus
 sudo pacman -S ibus ibus-libpinyin
 ```
 
-安装完成后重启计算机，然后进行简单的配置，即可使用中文输入法
+安装完成后打开设置界面，通过“键盘”中的“输入源”添加。
+
+在你添加至少两个输入源后，GNOME 会在托盘中显示输入选择图标。
+
+如果如此操作之后你没有成功，很可能你没有完成 locale-gen。
+
+默认切换输入法的快捷键是 `Super`+`Space`
 
 <!-- tabs:end -->
 

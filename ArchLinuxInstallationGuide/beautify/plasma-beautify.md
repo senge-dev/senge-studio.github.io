@@ -34,17 +34,15 @@
 > 
 > 系统设置->窗口管理->任务切换器->把微风改为翻转切换
 >
-> **注意**: KDE Plasma桌面在实时更新，实时使用效果可能会和文章中的不同。
+> **注意**: 
+> - KDE Plasma桌面在实时更新，实时使用效果可能会和文章中的不同。
 
 ### 安装Kvantum
 首先运行`sudo pacman -S kvantum`，然后手动添加kvantum主题文件夹以完成安装。
 
 ### 安装Latte-Dock
 
-使用以下命令安装latte-dock
-```bash
-sudo pacman -S latte-dock
-```
+安装`latte-dock`
 
 关闭背景大小
 
@@ -62,13 +60,10 @@ sudo pacman -S latte-dock
 
 新版的Latte Dock支持调整窗口与屏幕底部之间的间距，视觉类似于macOS Big Sur或Deepin Linux 20 或更新的版本
 
-如果右键点击图标无反应（此问题常常发生在Manjaro系统上），运行
-```bash
-sudo pacman -Syu
-```
 此时Latte-Dock可以正常使用
 
-> **注意**: 以上问题是作者在2020年使用manjaro时出现的问题，目前不知道问题是否存在。
+> **注意**:
+> - 以上问题是作者在2020年使用manjaro时出现的问题，目前不知道问题是否存在。
 
 
 ### 安装小部件
@@ -90,7 +85,9 @@ sudo pacman -S qt5-websockets python-docopt python-numpy python-pillow python-py
 ### 平铺KDE（可选，比较接近i3wm）
 
 2020年9月24日更新
-[教程来自于以下链接](https://opensuse.bwsl.wang/opensuse/%E5%B9%B3%E9%93%BAKDE.html)，[点击查看](https://space.bilibili.com/268630727?from=search&seid=12844584618959748428)原作者哔哩哔哩主页
+[教程来自于以下链接](https://opensuse.bwsl.wang/opensuse/%E5%B9%B3%E9%93%BAKDE.html)
+
+[点击查看](https://space.bilibili.com/268630727?from=search&seid=12844584618959748428)原作者哔哩哔哩主页
 
 首先运行以下命令，将平铺KDE配置克隆到桌面上
 ```bash

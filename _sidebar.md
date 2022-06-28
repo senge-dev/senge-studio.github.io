@@ -4,7 +4,9 @@
   * [ArchLinux安装](./ArchLinuxInstallationGuide/installation/README.md) 
     * [ArchLinux磁盘分区](./ArchLinuxInstallationGuide/installation/diskpart.md)
   * [ArchLinux配置](./ArchLinuxInstallationGuide/configuration.md) 
-  * [ArchLinux美化](./ArchLinuxInstallationGuide/beautify.md)
+  * [ArchLinux桌面美化](./ArchLinuxInstallationGuide/beautify/README.md)
+    * [ArchLinux Gnome桌面美化](./ArchLinuxInstallationGuide/beautify/gnome-beautify.md)
+    * [ArchLinux KDE桌面美化](./ArchLinuxInstallationGuide/beautify/plasma-beautify.md)
   * [ArchLinux终端配置](./ArchLinuxInstallationGuide/terminal%20configuration.md)
 
 

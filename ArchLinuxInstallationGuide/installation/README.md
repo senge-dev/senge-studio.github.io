@@ -582,7 +582,7 @@ systemctl enable iwd
 
 ~~安装有线网卡驱动`pacman -S dhcp dhcpcd netwkrkmanager`~~
 
-目前金需要安装以下驱动即可`pacman -S netwotkmanager`
+目前仅需要安装以下驱动即可`pacman -S netwotkmanager`
 
 
 ```bash
