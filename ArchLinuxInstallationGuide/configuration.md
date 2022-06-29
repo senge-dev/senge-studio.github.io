@@ -4,7 +4,9 @@
 
 ### 安装驱动
 
-#### 显卡驱动
+#### `*`显卡驱动
+
+本章节部分内容转载自[ArchLinuxStudio](https://archlinuxstudio.github.io/ArchLinuxTutorial/#)，原连接为：https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/graphic_driver
 
 运行`lspci | grep VGA`查看显卡型号
 
@@ -80,6 +82,8 @@ sudo pacman -S mesa lib32-mesa xf86-video-amdgpu vulkan-radeon lib32-vulkan-rade
 将英语注释掉，添加以下内容`LANG=zh_CN.UTF-8`
 
 安装x窗口系统`sudo pacman -S xorg`
+
+安装一些可能需要的声音组件，较新的CPU如果不安装的话可能会出现没声音的BUG`sudo pacman -S sof-firmware alsa-firmware alsa-ucm-conf`
 
 <!-- tabs:start -->
 
