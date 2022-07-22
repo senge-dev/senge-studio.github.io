@@ -11,20 +11,6 @@
     </head>
     <body>
         <div id="app">玩命加载中...</div>
-        <script>
-            window.$docsify = {
-                name: '',
-                repo: '',
-                // Docsify tabs主题
-                tabs: {
-                    persist    : true,      // default
-                    sync       : true,      // default
-                    theme      : 'material', // default
-                    tabComments: true,      // default
-                    tabHeadings: true       // default
-                  }
-            }
-        </script>
         <!-- Docsify v4 -->
         <script src="js/docsify.js"></script>
         <!-- Docsify Themeable主题 -->
@@ -32,6 +18,8 @@
         <!-- 侧边栏 -->
         <script>
             window.$docsify = {
+                name: '',
+                repo: '',
                 // 侧边栏
                 loadSidebar: true,
                 // 字数统计
@@ -53,6 +41,14 @@
                     tocMaxLevel: 4,
                     target: 'h2, h3, h4'
                 },
+                // Docsify tabs主题
+                tabs: {
+                    persist    : true,      // default
+                    sync       : false,      // default
+                    theme      : 'material', // default
+                    tabComments: true,      // default
+                    tabHeadings: true       // default
+                  },
             };
         </script>
         <!-- 复制到剪切板 -->
